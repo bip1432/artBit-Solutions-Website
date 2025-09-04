@@ -1,0 +1,65 @@
+.home_hero {
+  background-image: url('../img/hero_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 70px 0;
+}
+
+.home_hero .contents h5 {
+  font-size: 48px;
+  font-weight: 400;
+  margin-bottom: 15px;
+  font-family: "Ruthie", cursive;
+}
+
+.home_hero .text_slide_wrap {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+
+}
+
+.home_hero .text_slide {
+  display: inline-block;
+  min-width: 900px;
+  overflow: hidden;
+  line-height: 1.7;
+}
+
+.home_hero .text_slide .item {
+  text-align: left;
+}
+
+
+.logo_slider:before,
+.logo_slider:after {
+  position: absolute;
+  top: 0;
+  content: '';
+  width: 250px;
+  height: 100%;
+  z-index: 2;
+}
+
+.logo_slider {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.logo_slider_inner {
+  display: flex;
+  gap: 40px;
+  position: relative;
+}
+
+.logo_slider_inner img {
+  height: 50px;
+  width: auto;
+  flex-shrink: 0;
+  opacity: .7;
+}

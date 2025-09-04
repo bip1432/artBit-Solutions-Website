@@ -1,0 +1,329 @@
+/* Google Fonts  */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Ruthie&display=swap');
+
+
+/* Color Variables  */
+:root {
+  --primary: #4564FF;
+  --secondary: #00316D;
+  --header: #000000;
+  --font: #636060;
+  --font-light: #808080;
+  --white: #fff;
+  --border: #101010;
+  --bg-light: #F7F7F7E0;
+  --btn-hover: #4564FF66;
+}
+
+
+* {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  outline: none;
+}
+
+
+/***
+
+====================================================================
+  Global Settings
+====================================================================
+
+ ***/
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  font-size: 17px;
+  color: var(--font);
+  line-height: 28px;
+  font-weight: 400;
+  background: var(--white);
+  font-family: "Poppins", sans-serif;
+}
+
+.large-container {
+  max-width: 1700px;
+  padding: 0px 15px;
+  margin: 0 auto;
+}
+
+.container-fluid {
+  padding: 0px;
+}
+
+.auto-container {
+  position: static;
+  max-width: 1200px;
+  padding: 0px 15px;
+  margin: 0 auto;
+}
+
+.small-container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+
+a {
+  text-decoration: none;
+  transition: all 500ms ease;
+  -moz-transition: all 500ms ease;
+  -webkit-transition: all 500ms ease;
+  -ms-transition: all 500ms ease;
+  -o-transition: all 500ms ease;
+}
+
+a:hover {
+  color: var(--primary);
+  text-decoration: none;
+  outline: none;
+}
+
+a.link_reverse {
+  color: #fff;
+}
+
+a.link_reverse:hover {
+  color: var(--header);
+}
+
+.img_link:hover {
+  opacity: .7;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+ul.list-style-disc li {
+  list-style: disc;
+}
+
+ul.list-style-number li {
+  list-style: decimal;
+}
+
+input {
+  transition: all 500ms ease;
+}
+
+button:focus,
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+  transition: all 500ms ease;
+}
+
+p {
+  position: relative;
+  font-size: 17px;
+  line-height: 28px;
+  color: var(--font);
+  margin: 0px;
+  font-family: "Poppins", sans-serif;
+  transition: all 500ms ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: var(--header);
+  margin: 0px;
+  transition: all 500ms ease;
+}
+
+.lead {
+  font-weight: 500;
+}
+
+
+/* Tooltip colors  */
+.tooltip-inner {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+/* Change tooltip arrow color */
+.tooltip .tooltip-arrow::before {
+  border-top-color: var(--primary) !important;
+  border-bottom-color: var(--primary) !important;
+}
+
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: var(--primary) !important;
+}
+
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+  border-bottom-color: var(--primary) !important;
+  border-top-color: var(--primary) !important;
+}
+
+.tooltip.bs-tooltip-start .tooltip-arrow::before {
+  border-left-color: var(--primary) !important;
+}
+
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+  border-right-color: var(--primary) !important;
+}
+
+
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+img {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+.form-control,
+.form-select {
+  padding: .575rem .75rem;
+}
+
+.rad_4 {
+  border-radius: 4px;
+}
+
+.rad_6 {
+  border-radius: 6px;
+}
+
+/** button **/
+
+.theme-btn {
+  position: relative;
+  display: inline-block;
+  font-size: 18px;
+  line-height: 30px;
+  font-weight: 500;
+  background: var(--primary);
+  color: #fff;
+  padding: 12px 25px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 500ms ease;
+}
+
+.theme-btn i {
+  position: relative;
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 400;
+  margin-left: 10px;
+  top: 2px;
+}
+
+.theme-btn:hover {
+  background: var(--btn-hover);
+  color: var(--white);
+}
+
+
+.theme-btn.sm {
+  padding: 8px 16px;
+}
+
+
+.section {
+  padding: 120px 0px;
+  background: var(--white);
+}
+
+.section.light {
+  background: var(--bg-light);
+}
+
+.bg_secondary {
+  background: var(--secondary);
+}
+
+.scroll-top {
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  position: fixed;
+  bottom: 105%;
+  right: 30px;
+  font-size: 24px;
+  z-index: 99;
+  color: var(--white);
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  text-align: center;
+  cursor: pointer;
+  transition: 1s ease;
+}
+
+.scroll-top:before {
+  background: -webkit-linear-gradient(0deg, var(--grad-dark), var(--grad-light) 50%);
+  position: absolute;
+  content: '';
+  width: 55px;
+  height: 55px;
+  left: -1px;
+  top: -1px;
+  transform: scale(0, 0);
+  z-index: -1;
+  transition: all 500ms ease;
+}
+
+.scroll-top:hover:before {
+  transform: scale(1, 1);
+}
+
+.scroll-top.open {
+  bottom: 80px;
+}
+
+.scroll-top span {
+  color: var(--white);
+}
+
+.title {
+  font-size: 68px;
+  font-weight: 500;
+  color: var(--header);
+  text-transform: uppercase;
+}
+
+.title span {
+  color: var(--primary);
+}
+
+.title_2 {
+  font-size: 36px;
+  line-height: 46px;
+}
+
+.title_3 {
+  font-size: 24px;
+  line-height: 34px;
+}
+
+.title_4 {
+  font-size: 20px;
+  line-height: 24px;
+}
