@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swiper 2.5 Slides Active Bigger</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<style>
+body {margin:0;padding:40px;background:#f3f3f3;font-family:system-ui,sans-serif;}
+
+.our_services .service_card {width:90%; max-width:1200px;margin:0 auto;padding:60px 0;}
+
+.our_services .service_card .swiper-slide {
+  height: 280px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  box-sizing:border-box;
+  transition: all 0.4s ease;
+}
+
+.our_services .service_card .slide-inner {
+  width:100%;
+  height:100%;
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.our_services .service_card .slide-inner img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center bottom;
+  display:block;
+}
+</style>
+</head>
+<body>
+
+<div class="our_services">
+  <div class="service_card swiper service_swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><div class="slide-inner"><img src="https://picsum.photos/400/400?random=1"></div></div>
+      <div class="swiper-slide"><div class="slide-inner"><img src="https://picsum.photos/400/400?random=2"></div></div>
+      <div class="swiper-slide"><div class="slide-inner"><img src="https://picsum.photos/400/400?random=3"></div></div>
+      <div class="swiper-slide"><div class="slide-inner"><img src="https://picsum.photos/400/400?random=4"></div></div>
+      <div class="swiper-slide"><div class="slide-inner"><img src="https://picsum.photos/400/400?random=5"></div></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+document.querySelectorAll('.service_swiper').forEach(function(el){
+  const swiper = new Swiper(el, {
+    slidesPerView: 'auto',      // auto width
+    spaceBetween: 20,
+    loop: true,
+    centeredSlides: false,
+    autoplay: { delay: 2500, disableOnInteraction: false },
+    slideToClickedSlide: true,
+    on: {
+      init: adjustSlideWidths,
+      slideChangeTransitionStart: adjustSlideWidths
+    }
+  });
+
+  function adjustSlideWidths(swiper){
+    const containerWidth = swiper.width;
+    const gap = swiper.params.spaceBetween;
+    const slidesPerView = 2.5;
+
+    // Solve: active slide double width, 1.5 others fit in remaining space
+    const inactiveWidth = (containerWidth - 2 * gap) / (slidesPerView + 0.5); // approx
+    const activeWidth = inactiveWidth * 2;
+
+    swiper.slides.forEach(slide => {
+      if(slide.classList.contains('swiper-slide-active')){
+        slide.style.width = activeWidth + 'px';
+      } else {
+        slide.style.width = inactiveWidth + 'px';
+      }
+    });
+    swiper.update();
+  }
+});
+</script>
+
+</body>
+</html>

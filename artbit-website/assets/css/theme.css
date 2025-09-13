@@ -10,7 +10,7 @@
   --font: #636060;
   --font-light: #808080;
   --white: #fff;
-  --border: #101010;
+  --border: #00387C;
   --bg-light: #F7F7F7E0;
   --btn-hover: #4564FF66;
 }
@@ -313,9 +313,19 @@ img {
   color: var(--primary);
 }
 
+.section_title{
+  font-size: 48px;
+  font-weight: 500;
+  color: var(--header);
+  text-transform: uppercase;
+}
+
+.section_title span {
+  color: var(--primary);
+}
+
 .title_2 {
-  font-size: 36px;
-  line-height: 46px;
+  font-size: 42px;
 }
 
 .title_3 {
@@ -326,4 +336,58 @@ img {
 .title_4 {
   font-size: 20px;
   line-height: 24px;
+}
+
+.btn_primary{
+  display: inline-block;
+  background: var(--primary);
+  padding: 12px 45px;
+  color: var(--white);
+  font-size: 16px;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  text-transform: capitalize;
+  transition: all .3s ease;
+}
+.btn_primary:hover{
+  background: transparent;
+  color: var(--font);
+}
+
+.btn_secondary{
+  display: inline-block;
+  background: transparent;
+  padding: 12px 25px;
+  color: var(--font);
+  font-size: 16px;
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  text-transform: capitalize;
+  transition: all .3s ease;
+}
+.btn_secondary:hover{
+  background: var(--primary);
+  color: var(--white);
+}
+
+.subheader {
+  margin-bottom: 20px;
+}
+
+.subheader .btn{
+  display: inline-block;
+  padding: 8px 25px;
+  font-size: 15px;
+  background: rgba(240, 243, 255, 1);
+  color: rgba(0, 56, 124, 1);
+  border-radius: 10px;
+  border: 1px solid rgba(114, 114, 114, 1);
+
+  position: relative;
+  left: -15px;
+}
+
+.subheader .icon{
+  position: relative;
+  z-index: 1;
 }
