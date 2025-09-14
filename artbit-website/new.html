@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bottom Navbar with Megamenu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Navbar Styling */
+    .bottom-navbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+      z-index: 1050;
+    }
+
+    .nav-link {
+      position: relative;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Overlay */
+    .megamenu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 1040;
+    }
+
+    .megamenu-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Megamenu */
+    .megamenu {
+      position: fixed;
+      bottom: 60px; /* navbar height */
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      width: 80%;
+      background: #fff;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      border-radius: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+      z-index: 1051;
+      padding: 2rem;
+    }
+
+    .megamenu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Arrow */
+    .megamenu::before {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 10px 10px 0 10px;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent;
+      filter: drop-shadow(0 -2px 4px rgba(0,0,0,0.1));
+    }
+
+    /* Example content */
+    .megamenu .row > div {
+      padding: 10px;
+    }
+    .megamenu h6 {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .megamenu ul {
+      padding: 0;
+      list-style: none;
+    }
+    .megamenu ul li {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Overlay -->
+  <div class="megamenu-overlay"></div>
+
+  <!-- Navbar -->
+  <nav class="bottom-navbar">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="megamenu" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="megamenu" href="#">Services</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="megamenu" href="#">Start Project</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="megamenu" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="megamenu" href="#">More</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Megamenu -->
+  <div class="megamenu" id="megamenu">
+    <div class="row">
+      <div class="col-md-3">
+        <h6>Category 1</h6>
+        <ul>
+          <li><a href="#">Link 1</a></li>
+          <li><a href="#">Link 2</a></li>
+          <li><a href="#">Link 3</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6>Category 2</h6>
+        <ul>
+          <li><a href="#">Link 4</a></li>
+          <li><a href="#">Link 5</a></li>
+          <li><a href="#">Link 6</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6>Category 3</h6>
+        <ul>
+          <li><a href="#">Link 7</a></li>
+          <li><a href="#">Link 8</a></li>
+          <li><a href="#">Link 9</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6>Category 4</h6>
+        <ul>
+          <li><a href="#">Link 10</a></li>
+          <li><a href="#">Link 11</a></li>
+          <li><a href="#">Link 12</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const navLinks = document.querySelectorAll('[data-bs-toggle="megamenu"]');
+    const megamenu = document.getElementById('megamenu');
+    const overlay = document.querySelector('.megamenu-overlay');
+
+    navLinks.forEach(link => {
+      link.addEventListener('mouseenter', showMenu);
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        toggleMenu();
+      });
+    });
+
+    megamenu.addEventListener('mouseenter', showMenu);
+    megamenu.addEventListener('mouseleave', hideMenu);
+    overlay.addEventListener('click', hideMenu);
+
+    function showMenu() {
+      megamenu.classList.add('show');
+      overlay.classList.add('show');
+    }
+
+    function hideMenu() {
+      megamenu.classList.remove('show');
+      overlay.classList.remove('show');
+    }
+
+    function toggleMenu() {
+      megamenu.classList.toggle('show');
+      overlay.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

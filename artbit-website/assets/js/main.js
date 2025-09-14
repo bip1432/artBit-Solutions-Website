@@ -253,11 +253,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// Initialize all service sliders
+// // Initialize all service sliders
+// document.querySelectorAll('.service_swiper').forEach(function(el){
+//   const swiper = new Swiper(el, {
+//     slidesPerView: 2.5,
+//     spaceBetween: 20,
+//     loop: true,
+//     centeredSlides: false,
+//     autoplay: {
+//       delay: 2500,
+//       disableOnInteraction: false,
+//     },
+//     slideToClickedSlide: true,
+//     on: {
+//       init: function() {
+//         adjustSlidePositions(this);
+//       },
+//       slideChangeTransitionStart: function() {
+//         adjustSlidePositions(this);
+//       }
+//     }
+//   });
+
+//   function adjustSlidePositions(swiper) {
+//     swiper.slides.forEach((slide, index) => {
+//       const inner = slide.querySelector('.slide-inner');
+//       if(slide.classList.contains('swiper-slide-active')){
+//         inner.style.transform = 'scale(1)';
+//         slide.style.zIndex = 2;
+//       } else {
+//         inner.style.transform = 'scale(0.7)';
+//         slide.style.zIndex = 1;
+//       }
+//     });
+//   }
+// });
+
+
 document.querySelectorAll('.service_swiper').forEach(function(el){
-  const swiper = new Swiper(el, {
+  new Swiper(el, {
     slidesPerView: 2.5,
-    spaceBetween: 20,
+    spaceBetween: 10, // reduce gap to compensate scale 0.5
     loop: true,
     centeredSlides: false,
     autoplay: {
@@ -265,27 +301,5 @@ document.querySelectorAll('.service_swiper').forEach(function(el){
       disableOnInteraction: false,
     },
     slideToClickedSlide: true,
-    on: {
-      init: function() {
-        adjustSlidePositions(this);
-      },
-      slideChangeTransitionStart: function() {
-        adjustSlidePositions(this);
-      }
-    }
   });
-
-  function adjustSlidePositions(swiper) {
-    swiper.slides.forEach((slide, index) => {
-      const inner = slide.querySelector('.slide-inner');
-      if(slide.classList.contains('swiper-slide-active')){
-        inner.style.transform = 'scale(1)';
-        slide.style.zIndex = 2;
-      } else {
-        inner.style.transform = 'scale(0.7)';
-        slide.style.zIndex = 1;
-      }
-    });
-  }
 });
-
