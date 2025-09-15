@@ -1,4 +1,92 @@
 
+// Navbar
+
+(() => {
+  const navLinks = document.querySelectorAll('[data-bs-toggle="megamenu"]');
+  const overlay = document.querySelector('.megamenu-overlay');
+  const menus = document.querySelectorAll('.megamenu');
+
+  let activeMenu = null;
+  let currentTrigger = null;
+  let hoverTimeout = null;
+
+  function openMenu(menu, trigger) {
+    if (!menu || !trigger) return;
+
+    // close any other menus and reset active classes
+    menus.forEach(m => m.classList.remove('show'));
+    navLinks.forEach(l => l.classList.remove('active'));
+
+    // show chosen menu and mark its trigger active
+    overlay && overlay.classList.add('show');
+    menu.classList.add('show');
+    trigger.classList.add('active');
+
+    activeMenu = menu;
+    currentTrigger = trigger;
+  }
+
+  function closeMenus() {
+    menus.forEach(m => m.classList.remove('show'));
+    navLinks.forEach(l => l.classList.remove('active'));
+    overlay && overlay.classList.remove('show');
+
+    activeMenu = null;
+    currentTrigger = null;
+    clearTimeout(hoverTimeout);
+  }
+
+  function delayedClose() {
+    clearTimeout(hoverTimeout);
+    hoverTimeout = setTimeout(() => {
+      // safe checks in case activeMenu is null
+      const linkHover = !!document.querySelector('[data-bs-toggle="megamenu"]:hover');
+      const menuHover = activeMenu ? activeMenu.matches(':hover') : false;
+
+      if (!linkHover && !menuHover) {
+        closeMenus();
+      }
+    }, 150);
+  }
+
+  navLinks.forEach(link => {
+    const target = document.querySelector(link.dataset.target);
+    if (!target) return;
+
+    // make sure arrow exists for this link; if not, create it (optional)
+    if (!link.querySelector('.megamenu-arrow')) {
+      const span = document.createElement('span');
+      span.className = 'megamenu-arrow';
+      link.appendChild(span);
+    }
+
+    link.addEventListener('mouseenter', () => openMenu(target, link));
+    link.addEventListener('click', e => { e.preventDefault(); openMenu(target, link); });
+    link.addEventListener('mouseleave', delayedClose);
+
+    target.addEventListener('mouseenter', () => clearTimeout(hoverTimeout));
+    target.addEventListener('mouseleave', delayedClose);
+  });
+
+  overlay && overlay.addEventListener('click', closeMenus);
+
+  // re-evaluate arrow visibility if user resizes/scrolls (keeps UI correct)
+  window.addEventListener('resize', () => {
+    if (!activeMenu || !currentTrigger) return;
+    // nothing to recalc for arrow because arrow belongs to the link,
+    // but we force reflow for smoother visual in case layout changed
+    currentTrigger.offsetWidth;
+  }, { passive: true });
+
+  // capture scrolls in case layout changes
+  window.addEventListener('scroll', () => {
+    if (!activeMenu || !currentTrigger) return;
+    currentTrigger.offsetWidth;
+  }, true);
+})();
+
+
+
 // Text Slider
 
 $(document).ready(function () {
@@ -252,45 +340,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// Services Slider
 
-// // Initialize all service sliders
-// document.querySelectorAll('.service_swiper').forEach(function(el){
-//   const swiper = new Swiper(el, {
-//     slidesPerView: 2.5,
-//     spaceBetween: 20,
-//     loop: true,
-//     centeredSlides: false,
-//     autoplay: {
-//       delay: 2500,
-//       disableOnInteraction: false,
-//     },
-//     slideToClickedSlide: true,
-//     on: {
-//       init: function() {
-//         adjustSlidePositions(this);
-//       },
-//       slideChangeTransitionStart: function() {
-//         adjustSlidePositions(this);
-//       }
-//     }
-//   });
-
-//   function adjustSlidePositions(swiper) {
-//     swiper.slides.forEach((slide, index) => {
-//       const inner = slide.querySelector('.slide-inner');
-//       if(slide.classList.contains('swiper-slide-active')){
-//         inner.style.transform = 'scale(1)';
-//         slide.style.zIndex = 2;
-//       } else {
-//         inner.style.transform = 'scale(0.7)';
-//         slide.style.zIndex = 1;
-//       }
-//     });
-//   }
-// });
-
-
-document.querySelectorAll('.service_swiper').forEach(function(el){
+document.querySelectorAll('.service_swiper').forEach(function (el) {
   new Swiper(el, {
     slidesPerView: 2.5,
     spaceBetween: 10, // reduce gap to compensate scale 0.5
@@ -303,3 +355,29 @@ document.querySelectorAll('.service_swiper').forEach(function(el){
     slideToClickedSlide: true,
   });
 });
+
+
+//  Replace all SVG images with inline SVG
+
+  $(document).ready(function () {
+    jQuery('img.svg').each(function () {
+      var $img = jQuery(this);
+      var imgURL = $img.attr('src');
+
+      jQuery.get(imgURL, function (data) {
+        // Get the SVG tag, ignore the rest
+        var $svg = jQuery(data).find('svg');
+
+        // Set the replaced image's classes to the new SVG
+        $svg.attr('class', $img.attr('class'));
+
+        // Remove any invalid XML tags as per http://validator.w3.org
+        $svg.removeAttr('xmlns:a');
+
+        // Replace image with new SVG
+        $img.replaceWith($svg);
+
+      }, 'xml');
+    });
+
+  });

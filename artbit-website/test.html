@@ -7,7 +7,7 @@
   <title>Bottom Navbar with Megamenu (Refined)</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    /* Navbar */
+    /* --- NAVBAR --- */
     .bottom-navbar {
       position: fixed;
       bottom: 50px;
@@ -21,13 +21,39 @@
       padding: 0 1rem;
     }
 
-    /* Nav links */
     .bottom-navbar .nav-link {
+      position: relative;
       padding: 1rem 1.5rem;
-      cursor: pointer;
     }
 
-    /* Overlay */
+    /* --- ARROW (now on the parent link) --- */
+    .megamenu-arrow {
+      position: absolute;
+      left: 50%;
+      top: -10px;
+      /* place above navbar, between menu & navbar */
+      transform: translateX(-50%) translateY(0);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #fff;
+      /* triangle pointing UP toward the menu */
+      opacity: 0;
+      transition: opacity .18s ease, transform .18s ease;
+      pointer-events: none;
+      z-index: 1052;
+      /* above the megamenu */
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
+    }
+
+    /* visible when its link/menu is active */
+    .nav-link.active .megamenu-arrow {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* --- OVERLAY --- */
     .megamenu-overlay {
       position: fixed;
       inset: 0;
@@ -43,15 +69,14 @@
       visibility: visible;
     }
 
-    /* Megamenu */
+    /* --- MEGAMENU --- */
     .megamenu {
       position: absolute;
-      /* relative to navbar */
-      bottom: 100%;
-      /* above navbar */
+      bottom: calc(100% + 12px);
+      /* leave space for the arrow */
       left: 50%;
-      transform: translateX(-50%) translateY(-10px);
-      /* slide effect */
+      transform: translateX(-50%) translateY(8px);
+      /* off by default for slide */
       width: 80vw;
       max-width: 1000px;
       background: #fff;
@@ -61,11 +86,11 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity .3s ease, transform .3s ease, visibility .3s ease;
+      transition: opacity .28s ease, transform .28s ease, visibility .28s ease;
       z-index: 1051;
     }
 
-    /* Show state */
+    /* show state */
     .megamenu.show {
       opacity: 1;
       visibility: visible;
@@ -73,38 +98,24 @@
       pointer-events: auto;
     }
 
-    /* Arrow at bottom, pointing down to navbar link */
-    .megamenu::after {
-      content: "";
-      position: absolute;
-      bottom: -10px;
-      /* below megamenu */
-      left: var(--arrow-left, 50%);
-      transform: translateX(-50%);
-      border-width: 10px 10px 0 10px;
-      border-style: solid;
-      border-color: #fff transparent transparent transparent;
-      filter: drop-shadow(0 -2px 4px rgba(0, 0, 0, 0.1));
-      transition: left .2s ease;
-    }
-
-    /* Example content inside megamenu */
+    /* example content */
     .megamenu .row>div {
       padding: 10px;
     }
 
     .megamenu h6 {
-      font-weight: bold;
+      font-weight: 600;
       margin-bottom: 10px;
     }
 
     .megamenu ul {
-      padding: 0;
       list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
     .megamenu ul li {
-      margin: 5px 0;
+      margin: 6px 0;
     }
   </style>
 </head>
@@ -117,11 +128,15 @@
   <nav class="bottom-navbar">
     <ul class="nav justify-content-center">
       <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-      <li class="nav-item"><a class="nav-link" data-bs-toggle="megamenu" data-target="#servicesMenu"
-          href="#">Services</a></li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="megamenu" data-target="#servicesMenu" href="#">Services</a>
+        <span class="megamenu-arrow"></span>
+      </li>
       <li class="nav-item"><a class="nav-link" href="#">Start Project</a></li>
       <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
-      <li class="nav-item"><a class="nav-link" data-bs-toggle="megamenu" data-target="#moreMenu" href="#">More</a>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="megamenu" data-target="#moreMenu" href="#">More</a>
+        <span class="megamenu-arrow"></span>
       </li>
     </ul>
 
@@ -198,34 +213,33 @@
   <div class="megamenu-overlay"></div>
 
 
-  <script>
+  <!-- <script>
     const navLinks = document.querySelectorAll('[data-bs-toggle="megamenu"]');
     const overlay = document.querySelector('.megamenu-overlay');
     const menus = document.querySelectorAll('.megamenu');
     let activeMenu = null;
     let hoverTimeout = null;
 
-function openMenu(menu, trigger) {
-  menus.forEach(m => m.classList.remove('show'));
-  overlay.classList.add('show');
-  menu.classList.add('show');
-  activeMenu = menu;
+    function openMenu(menu, trigger) {
+      menus.forEach(m => m.classList.remove('show'));
+      navLinks.forEach(l => l.classList.remove('active'));
 
-  // Get center of link relative to viewport
-  const linkRect = trigger.getBoundingClientRect();
+      overlay.classList.add('show');
+      menu.classList.add('show');
+      trigger.classList.add('active');
 
-  // Get megamenu position (after showing to calculate correctly)
-  const menuRect = menu.getBoundingClientRect();
+      activeMenu = menu;
+      currentTrigger = trigger;
+    }
 
-  // Arrow relative to megamenu
-  const arrowPos = linkRect.left + linkRect.width / 2 - menuRect.left;
+    function closeMenus() {
+      menus.forEach(m => m.classList.remove('show'));
+      navLinks.forEach(l => l.classList.remove('active'));
 
-  // Clamp arrow inside menu (optional)
-  const clampedPos = Math.min(Math.max(arrowPos, 10), menuRect.width - 10);
-
-  menu.style.setProperty('--arrow-left', `${clampedPos}px`);
-}
-
+      overlay.classList.remove('show');
+      activeMenu = null;
+      currentTrigger = null;
+    }
 
     function delayedClose() {
       clearTimeout(hoverTimeout);
@@ -252,7 +266,92 @@ function openMenu(menu, trigger) {
 
     overlay.addEventListener('click', closeMenus);
 
+  </script> -->
 
+  <script>
+    (() => {
+      const navLinks = document.querySelectorAll('[data-bs-toggle="megamenu"]');
+      const overlay = document.querySelector('.megamenu-overlay');
+      const menus = document.querySelectorAll('.megamenu');
+
+      let activeMenu = null;
+      let currentTrigger = null;
+      let hoverTimeout = null;
+
+      function openMenu(menu, trigger) {
+        if (!menu || !trigger) return;
+
+        // close any other menus and reset active classes
+        menus.forEach(m => m.classList.remove('show'));
+        navLinks.forEach(l => l.classList.remove('active'));
+
+        // show chosen menu and mark its trigger active
+        overlay && overlay.classList.add('show');
+        menu.classList.add('show');
+        trigger.classList.add('active');
+
+        activeMenu = menu;
+        currentTrigger = trigger;
+      }
+
+      function closeMenus() {
+        menus.forEach(m => m.classList.remove('show'));
+        navLinks.forEach(l => l.classList.remove('active'));
+        overlay && overlay.classList.remove('show');
+
+        activeMenu = null;
+        currentTrigger = null;
+        clearTimeout(hoverTimeout);
+      }
+
+      function delayedClose() {
+        clearTimeout(hoverTimeout);
+        hoverTimeout = setTimeout(() => {
+          // safe checks in case activeMenu is null
+          const linkHover = !!document.querySelector('[data-bs-toggle="megamenu"]:hover');
+          const menuHover = activeMenu ? activeMenu.matches(':hover') : false;
+
+          if (!linkHover && !menuHover) {
+            closeMenus();
+          }
+        }, 150);
+      }
+
+      navLinks.forEach(link => {
+        const target = document.querySelector(link.dataset.target);
+        if (!target) return;
+
+        // make sure arrow exists for this link; if not, create it (optional)
+        if (!link.querySelector('.megamenu-arrow')) {
+          const span = document.createElement('span');
+          span.className = 'megamenu-arrow';
+          link.appendChild(span);
+        }
+
+        link.addEventListener('mouseenter', () => openMenu(target, link));
+        link.addEventListener('click', e => { e.preventDefault(); openMenu(target, link); });
+        link.addEventListener('mouseleave', delayedClose);
+
+        target.addEventListener('mouseenter', () => clearTimeout(hoverTimeout));
+        target.addEventListener('mouseleave', delayedClose);
+      });
+
+      overlay && overlay.addEventListener('click', closeMenus);
+
+      // re-evaluate arrow visibility if user resizes/scrolls (keeps UI correct)
+      window.addEventListener('resize', () => {
+        if (!activeMenu || !currentTrigger) return;
+        // nothing to recalc for arrow because arrow belongs to the link,
+        // but we force reflow for smoother visual in case layout changed
+        currentTrigger.offsetWidth;
+      }, { passive: true });
+
+      // capture scrolls in case layout changes
+      window.addEventListener('scroll', () => {
+        if (!activeMenu || !currentTrigger) return;
+        currentTrigger.offsetWidth;
+      }, true);
+    })();
   </script>
 </body>
 
