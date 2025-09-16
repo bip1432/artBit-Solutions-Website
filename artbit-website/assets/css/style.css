@@ -10,18 +10,91 @@
   display: inline-block;
   border-radius: 8px;
   padding: 0 1rem;
+  min-width: 700px;
+}
+
+.bottom-navbar .nav {
+  padding: 10px 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .bottom-navbar .nav-link {
   position: relative;
-  padding: 1rem 1.5rem;
+  padding: 6px 20px;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  font-size: 15px;
+  color: var(--font);
+}
+
+.bottom-navbar .nav-link:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.bottom-navbar .nav-link.highlighted {
+  position: relative;
+  color: var(--primary);
+  clip-path: inset(0 round 6px);
+  padding: 0;
+  border: 0;
+}
+
+/* Register the custom property */
+@property --_gradient-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.bottom-navbar .nav-link.highlighted .bg {
+  /* your gradient background */
+  background: conic-gradient(from var(--_gradient-angle) at 8.04% 51.79%,
+      #FBFAF6 0deg,
+      rgba(251, 250, 246, 0) 360deg),
+    #40ff86;
+
+
+
+  /* animation */
+  animation: gradient-angle-rotate 3s linear infinite;
+
+  pointer-events: none;
+  position: absolute;
+  inset: 0%;
+}
+
+.bottom-navbar .nav-link.highlighted .content {
+  clip-path: inset(2px round calc(6px - 2px));
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  /* background-image: linear-gradient(180deg, #592db5, #7d40ff); */
+  background: #dae0ff;
+  padding: 10px 30px;
+  color: var(--primary);
+}
+
+@keyframes gradient-angle-rotate {
+  0% {
+    --_gradient-angle: 0deg;
+  }
+
+  100% {
+    --_gradient-angle: 360deg;
+  }
 }
 
 
 .megamenu-arrow {
   position: absolute;
   left: 50%;
-  top: -10px;
+  top: -27px;
   transform: translateX(-50%) translateY(0);
   width: 0;
   height: 0;
@@ -149,14 +222,24 @@
 .megamenu .recent-works .img {
   overflow: hidden;
 }
-.megamenu .recent-works .img img{
+
+.megamenu .recent-works .img img {
   transition: all .3s ease;
 }
 
-.megamenu .recent-works:hover .img img{
+.megamenu .recent-works:hover .img img {
   transform-style: unset;
   transform: scale(1.2);
   -webkit-transform: scale(1.2);
+}
+
+
+@media screen and (max-width: 767px) {
+  .bottom-navbar{
+    width: 100%;
+    bottom: 0;
+    border-radius: 20px 20px 0 0;
+  }
 }
 
 
