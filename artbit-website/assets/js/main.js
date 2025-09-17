@@ -61,7 +61,16 @@
     }
 
     link.addEventListener('mouseenter', () => openMenu(target, link));
-    link.addEventListener('click', e => { e.preventDefault(); openMenu(target, link); });
+
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      if (activeMenu === target) {
+        closeMenus(); // toggle: close if already open
+      } else {
+        openMenu(target, link);
+      }
+    });
+
     link.addEventListener('mouseleave', delayedClose);
 
     target.addEventListener('mouseenter', () => clearTimeout(hoverTimeout));
@@ -84,6 +93,7 @@
     currentTrigger.offsetWidth;
   }, true);
 })();
+
 
 
 
