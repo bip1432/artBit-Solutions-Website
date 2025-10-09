@@ -512,6 +512,17 @@
 .our_services .service_card {
   margin-bottom: 50px;
 }
+.our_services .service_card .service_title{
+  display: inline-block;
+  font-size: 42px;
+  color: var(--tertiary);
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.our_services .service_card .service_title:hover{
+  color: var(--primary);
+}
 
 
 .service_swiper {
@@ -1275,7 +1286,7 @@ textarea.input {
   margin-bottom: 10px;
 }
 
-.ready_to_work_box .desc{
+.ready_to_work_box .desc {
   font-size: 16px;
   color: var(--font);
   margin-bottom: 15px;
