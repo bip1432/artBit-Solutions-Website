@@ -4,16 +4,21 @@
 
 /* Color Variables  */
 :root {
-  --primary: #4564FF;
+  --primary: rgba(3, 169, 255, 1);
   --secondary: #00316D;
+  --tertiary: rgba(2, 93, 140, 1);
   --header: #000000;
+  --title-v2: #00387C;
   --font: #636060;
   --font-light: #808080;
   --white: #fff;
   --border: #00387C;
   --border-light: #e5e5e5;
   --bg-light: #F7F7F7E0;
+  --bg-primary-light: rgba(240, 250, 255, 1);
   --btn-hover: #4564FF66;
+  --rating-color: rgba(255, 205, 41, 1);
+  --warning-color: rgba(255, 137, 99, 1);
 }
 
 
@@ -44,7 +49,7 @@ body {
 }
 
 .large-container {
-  max-width: 1700px;
+  max-width: 1600px;
   padding: 0px 15px;
   margin: 0 auto;
 }
@@ -253,6 +258,10 @@ img {
   background: var(--bg-light);
 }
 
+.section.primary-light {
+  background: var(--bg-primary-light);
+}
+
 .bg_secondary {
   background: var(--secondary);
 }
@@ -314,7 +323,7 @@ img {
   font-size: 48px;
   font-weight: 500;
   color: var(--header);
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .section_title span {
@@ -338,7 +347,7 @@ img {
 .btn_primary{
   display: inline-block;
   background: var(--primary);
-  padding: 12px 45px;
+  padding: 10px 50px;
   color: var(--white);
   font-size: 16px;
   border: 1px solid var(--primary);
@@ -366,6 +375,14 @@ img {
   background: var(--primary);
   color: var(--white);
 }
+.btn_secondary.white{
+  background: #fff;
+  border: 1px solid var(--primary);
+}
+.btn_secondary.white:hover{
+  background: var(--primary);
+  color: var(--white);
+}
 
 .subheader {
   margin-bottom: 20px;
@@ -385,6 +402,15 @@ img {
 }
 
 .subheader .icon{
+  width: 48px;
   position: relative;
   z-index: 1;
+}
+
+.section_btn_divider{
+  background-image: url(../img/section-btn-border.png);
+  background-size: contain;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  padding-bottom: 15px;
 }

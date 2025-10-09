@@ -369,25 +369,141 @@ document.querySelectorAll('.service_swiper').forEach(function (el) {
 
 //  Replace all SVG images with inline SVG
 
-  $(document).ready(function () {
-    jQuery('img.svg').each(function () {
-      var $img = jQuery(this);
-      var imgURL = $img.attr('src');
+$(document).ready(function () {
+  jQuery('img.svg').each(function () {
+    var $img = jQuery(this);
+    var imgURL = $img.attr('src');
 
-      jQuery.get(imgURL, function (data) {
-        // Get the SVG tag, ignore the rest
-        var $svg = jQuery(data).find('svg');
+    jQuery.get(imgURL, function (data) {
+      // Get the SVG tag, ignore the rest
+      var $svg = jQuery(data).find('svg');
 
-        // Set the replaced image's classes to the new SVG
-        $svg.attr('class', $img.attr('class'));
+      // Set the replaced image's classes to the new SVG
+      $svg.attr('class', $img.attr('class'));
 
-        // Remove any invalid XML tags as per http://validator.w3.org
-        $svg.removeAttr('xmlns:a');
+      // Remove any invalid XML tags as per http://validator.w3.org
+      $svg.removeAttr('xmlns:a');
 
-        // Replace image with new SVG
-        $img.replaceWith($svg);
+      // Replace image with new SVG
+      $img.replaceWith($svg);
 
-      }, 'xml');
-    });
-
+    }, 'xml');
   });
+
+});
+
+
+// Initialize counter animation
+
+$(document).ready(function () {
+  function animateCounter(counter) {
+    if ($(counter).hasClass('animated')) return;
+
+    $(counter).addClass('animated');
+    $(counter).prop('Counter', 0).animate({
+      Counter: $(counter).text()
+    }, {
+      duration: 3000,
+      easing: 'swing',
+      step: function (now) {
+        $(this).text(Math.ceil(now));
+      }
+    });
+  }
+
+  let observer = new IntersectionObserver(function (entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        observer.unobserve(entry.target); // Stop observing after animation starts
+      }
+    });
+  }, { root: null, threshold: 0.3 });
+
+  $('.counter').each(function () {
+    observer.observe(this);
+  });
+
+  // Check if any counter is already in view on page load
+  $(window).on("load", function () {
+    $(".counter").each(function () {
+      if ($(this).is(":visible") && $(this).offset().top < $(window).scrollTop() + $(window).height()) {
+        animateCounter(this);
+      }
+    });
+  });
+});
+
+
+// Client Carousel
+
+$(document).ready(function () {
+  $(".clientSlider").owlCarousel({
+    loop: true,
+    margin: 20,
+    dots: false,
+    nav: true,
+    autoplay: true,
+    autoplayTimeout: 4000,
+    autoplayHoverPause: true,
+
+    navText: [
+      '<i class="fa-solid fa-arrow-left"></i>',
+      '<i class="fa-solid fa-arrow-right"></i>'
+    ],
+    responsive: {
+      0: { items: 1 },
+      575: { items: 2 },
+      992: { items: 3 },
+      1400: { items: 4 }
+    }
+  });
+});
+
+
+// Testimonial Carousel
+
+$(document).ready(function () {
+  $(".testimonialSlider").owlCarousel({
+    loop: true,
+    margin: 20,
+    dots: false,
+    nav: true,
+    autoplay: true,
+    autoplayTimeout: 4000,
+    autoplayHoverPause: true,
+
+    navText: [
+      '<i class="fa-solid fa-arrow-left"></i>',
+      '<i class="fa-solid fa-arrow-right"></i>'
+    ],
+    responsive: {
+      0: { items: 1 },
+      575: { items: 2 },
+      992: { items: 3 },
+      1400: { items: 4 }
+    }
+  });
+});
+
+
+// Contact form
+
+const inputs = document.querySelectorAll(".input");
+
+function focusFunc() {
+  let parent = this.parentNode;
+  parent.classList.add("focus");
+}
+
+function blurFunc() {
+  let parent = this.parentNode;
+  if (this.value == "") {
+    parent.classList.remove("focus");
+  }
+}
+
+inputs.forEach((input) => {
+  input.addEventListener("focus", focusFunc);
+  input.addEventListener("blur", blurFunc);
+});
