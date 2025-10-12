@@ -363,7 +363,19 @@ document.querySelectorAll('.service_swiper').forEach(function (el) {
       disableOnInteraction: false,
     },
     slideToClickedSlide: true,
+
+    breakpoints: {
+      0: {   // for small tablets
+        slidesPerView: 1.5,
+        spaceBetween: 10,
+      },
+      574: {   // for tablets
+        slidesPerView: 2.5,
+        spaceBetween: 12,
+      },
+    }
   });
+
 });
 
 
@@ -465,7 +477,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $(".testimonialSlider").owlCarousel({
-    loop: true,
+    // loop: true,
     margin: 20,
     dots: false,
     nav: true,
@@ -480,8 +492,8 @@ $(document).ready(function () {
     responsive: {
       0: { items: 1 },
       575: { items: 2 },
-      992: { items: 3 },
-      1400: { items: 4 }
+      992: { items: 2 },
+      1400: { items: 3 }
     }
   });
 });

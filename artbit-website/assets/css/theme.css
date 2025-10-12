@@ -1,6 +1,8 @@
 /* Google Fonts  */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Ruthie&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Carattere&display=swap');
+
 
 /* Color Variables  */
 :root {
@@ -212,41 +214,6 @@ img {
   border-radius: 6px;
 }
 
-/** button **/
-
-.theme-btn {
-  position: relative;
-  display: inline-block;
-  font-size: 18px;
-  line-height: 30px;
-  font-weight: 500;
-  background: var(--primary);
-  color: #fff;
-  padding: 12px 25px;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: all 500ms ease;
-}
-
-.theme-btn i {
-  position: relative;
-  font-size: 22px;
-  line-height: 30px;
-  font-weight: 400;
-  margin-left: 10px;
-  top: 2px;
-}
-
-.theme-btn:hover {
-  background: var(--btn-hover);
-  color: var(--white);
-}
-
-
-.theme-btn.sm {
-  padding: 8px 16px;
-}
 
 
 .section {
@@ -258,12 +225,20 @@ img {
   background: var(--bg-light);
 }
 
+.section.primary {
+  background: var(--primary);
+}
+
 .section.primary-light {
   background: var(--bg-primary-light);
 }
 
 .bg_secondary {
   background: var(--secondary);
+}
+
+.section.primary .section_title span, .section.primary p{
+  color: var(--white);
 }
 
 .scroll-top {
@@ -315,11 +290,12 @@ img {
   text-transform: uppercase;
 }
 
-.title span {
+.title>span {
   color: var(--primary);
+  font-family: "Carattere", cursive;
 }
 
-.section_title{
+.section_title {
   font-size: 48px;
   font-weight: 500;
   color: var(--header);
@@ -328,6 +304,7 @@ img {
 
 .section_title span {
   color: var(--primary);
+  font-family: "Carattere", cursive;
 }
 
 .title_2 {
@@ -344,51 +321,107 @@ img {
   line-height: 24px;
 }
 
-.btn_primary{
+
+/** buttons **/
+
+.btn_primary {
+  position: relative;
   display: inline-block;
-  background: var(--primary);
-  padding: 10px 50px;
-  color: var(--white);
   font-size: 16px;
-  border: 1px solid var(--primary);
-  border-radius: 8px;
-  text-transform: capitalize;
-  transition: all .3s ease;
-}
-.btn_primary:hover{
-  background: transparent;
-  color: var(--font);
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  background: var(--primary);
+  color: #fff !important;
+  padding: 12px 40px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  z-index: 1;
+  transition: all 500ms ease;
 }
 
-.btn_secondary{
+
+
+.btn_primary:before {
+  position: absolute;
+  content: '';
+  background: var(--secondary);
+  width: 0%;
+  height: 100%;
+  top: 0px;
+  right: 0px;
+  border-radius: 4px;
+  z-index: -1;
+  transition: all 500ms ease;
+}
+
+.btn_primary:hover:before {
+  width: 100%;
+  left: 0px;
+}
+
+.btn_primary:hover{
+  border-color: var(--secondary);
+}
+
+
+.btn_secondary {
+  position: relative;
   display: inline-block;
-  background: transparent;
-  padding: 12px 25px;
-  color: var(--font);
   font-size: 16px;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  background: transparent;
+  color: var(--header) !important;
+  padding: 12px 40px;
+  text-align: center;
+  cursor: pointer;
   border: 1px solid var(--primary);
-  border-radius: 8px;
-  text-transform: capitalize;
-  transition: all .3s ease;
+  border-radius: 5px;
+  z-index: 1;
+  transition: all 500ms ease;
 }
-.btn_secondary:hover{
-  background: var(--primary);
-  color: var(--white);
+
+.btn_secondary:before {
+  position: absolute;
+  content: '';
+  background: var(--secondary);
+  width: 0%;
+  height: 100%;
+  top: 0px;
+  right: 0px;
+  z-index: -1;
+  border-radius: 4px;
+  border-color: var(--secondary);
+  transition: all 500ms ease;
 }
-.btn_secondary.white{
+
+.btn_secondary:hover:before {
+  width: 100%;
+  left: 0px;
+  color: var(--white) !important;
+}
+.btn_secondary:hover {
+  color: var(--white) !important;
+  border-color: var(--secondary);
+}
+
+
+.btn_secondary.white {
   background: #fff;
   border: 1px solid var(--primary);
 }
 .btn_secondary.white:hover{
-  background: var(--primary);
-  color: var(--white);
+  border-color: var(--secondary);
 }
+
 
 .subheader {
   margin-bottom: 20px;
 }
 
-.subheader .btn{
+.subheader .btn {
   display: inline-block;
   padding: 8px 25px;
   font-size: 15px;
@@ -401,16 +434,28 @@ img {
   left: -15px;
 }
 
-.subheader .icon{
+.subheader .icon {
   width: 48px;
   position: relative;
   z-index: 1;
 }
 
-.section_btn_divider{
+.section_btn_divider {
   background-image: url(../img/section-btn-border.png);
   background-size: contain;
   background-position: bottom center;
   background-repeat: no-repeat;
   padding-bottom: 15px;
+}
+
+@media screen and (max-width: 767px) {
+  .section{
+    padding: 70px 0;
+  }
+  .section_title{
+    font-size: 32px;
+  }
+  p{
+    font-size: 16px;
+  }
 }
