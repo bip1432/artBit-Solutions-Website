@@ -477,21 +477,15 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $(".testimonialSlider").owlCarousel({
-    // loop: true,
+    loop: true,
     margin: 20,
-    dots: false,
-    nav: true,
+    nav: false,
     autoplay: true,
     autoplayTimeout: 4000,
     autoplayHoverPause: true,
 
-    navText: [
-      '<i class="fa-solid fa-arrow-left"></i>',
-      '<i class="fa-solid fa-arrow-right"></i>'
-    ],
     responsive: {
       0: { items: 1 },
-      575: { items: 2 },
       992: { items: 2 },
       1400: { items: 3 }
     }
