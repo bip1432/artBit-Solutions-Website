@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>artBit Solutions</title>
+
+  <!-- Bootstrap 5.3.3 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6.5.2 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+  <link rel="stylesheet" href="./assets/css/theme.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+
+  <nav class="bottom-navbar">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span class="text">Projects</span>
+          <span class="icon d-inline-block d-md-none"><img class="svg" src="./assets/img/menu-icons/projects.svg"
+              alt="Projects"></span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="megamenu" data-target="#servicesMenu" href="#">
+          <span class="text">Services</span>
+          <span class="icon d-inline-block d-md-none"><img class="svg" src="./assets/img/menu-icons/services.svg"
+              alt="Services"></span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link highlighted" href="#">
+          <span class="bg"></span>
+          <span class="content"><img class="svg" src="./assets/img/menu-icons/contact.svg" alt="Contact"> <span
+              class="d-none d-md-inline-block">Start Project</span></span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <span class="text">Pricing</span>
+          <span class="icon d-inline-block d-md-none"><img class="svg" src="./assets/img/menu-icons/pricing.svg"
+              alt="Pricing"></span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="megamenu" data-target="#moreMenu" href="javascript:void(0)">
+          <span class="text">More</span>
+          <span class="icon"><img class="svg" src="./assets/img/menu-icons/more.svg" alt="more"></span>
+        </a>
+      </li>
+      <div class="mobile_nav_bg"></div>
+      <img class="svg nav_curve_shape d-block d-md-none" src="./assets/img/nav-shape.svg" alt="">
+    </ul>
+
+    <!-- Services Megamenu -->
+    <div class="megamenu" id="servicesMenu">
+      <div class="row gx-5">
+        <div class="col-md-6">
+          <a class="link-item" href="#">
+            <div>
+              <h4>Graphics Design</h4>
+              <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <span class="icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+          <a class="link-item" href="#">
+            <div>
+              <h4>Video Editing</h4>
+              <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <span class="icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+          <a class="link-item" href="#">
+            <div>
+              <h4>Mobile App Development</h4>
+              <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <span class="icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+          <a class="link-item" href="#">
+            <div>
+              <h4>Website Development</h4>
+              <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <span class="icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+          <a class="link-item" href="#">
+            <div>
+              <h4>DIgital Marketing</h4>
+              <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <span class="icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+        </div>
+
+        <div class="col-md-6 d-none d-md-block">
+          <a class="recent-works" href="#">
+            <div class="contents">
+              <div class="header">
+                <h4>Our Latest Work</h4>
+                <span class="icon">
+                  <img class="svg" src="./assets/img/arrow-link.svg" alt="Our Latest Work" title="Our Latest Work">
+                </span>
+              </div>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae commodi numquam natus corporis rem,
+                rerum ut? Laboriosam fugit dolorum assumenda dignissimos rem error deleniti quisquam</p>
+            </div>
+            <div class="img">
+              <img src="./assets/img/recent-work.avif" alt="Our Latest Work" title="Our Latest Work">
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- More Megamenu -->
+    <div class="megamenu" id="moreMenu">
+      <div class="row gx-5">
+        <div class="col-md-6 d-none d-md-block">
+          <a class="recent-works" href="#">
+            <div class="contents">
+              <div class="header">
+                <h4>Our Latest Work</h4>
+                <span class="icon">
+                  <img class="svg" src="./assets/img/arrow-link.svg" alt="Our Latest Work" title="Our Latest Work">
+                </span>
+              </div>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae commodi numquam natus corporis rem,
+                rerum ut? Laboriosam fugit dolorum assumenda dignissimos rem error deleniti quisquam</p>
+            </div>
+            <div class="img">
+              <img src="./assets/img/recent-work.avif" alt="Our Latest Work" title="Our Latest Work">
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6">
+          <a class="link-item" href="#">
+            <div>
+              <h4>Home</h4>
+              <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <span class="icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+          <a class="link-item" href="#">
+            <div>
+              <h4>About Us</h4>
+              <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <span class="icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+          <a class="link-item" href="#">
+            <div>
+              <h4>Our Team</h4>
+              <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <span class="icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+          <a class="link-item" href="#">
+            <div>
+              <h4>Blogs</h4>
+              <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <span class="icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+          <a class="link-item" href="#">
+            <div>
+              <h4>Career</h4>
+              <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <span class="icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+          <a class="link-item" href="#">
+            <div>
+              <h4>Contact Us</h4>
+              <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+            <span class="icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Overlay -->
+  <div class="megamenu-overlay"></div>
+
+
+  <section class="single_page_hero services">
+    <div class="container">
+      <div class="contents">
+        <a href="#"><img class="img-fluid logo mb-4" src="./assets/img/logo-white.png" width="300"
+            alt="Artbit Solutions" title="Artbit Solutions"></a>
+
+        <h1 class="title">Pixels To Purpose</h1>
+        <h4 class="subtitle">Concepts To Impact</h4>
+        <p class="desc">Artbit Solutions is a creative digital agency delivering user-focused design, seamless
+          technology, and impactful results for businesses worldwide</p>
+        <div class="mt-4">
+          <a class="btn_primary" href="#">Start Project</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section light services_grid">
+    <div class="container">
+      <div class="text-center">
+        <div class="subheader">
+          <img class="icon" src="./assets/img/subheader-icon.png" alt="Sub header icon">
+          <span class="btn">Our Services</span>
+        </div>
+
+        <h2 class="section_title">Explore Our <span>Services</span></h2>
+        <p class="section_desc mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur reiciendis
+          corrupti veniam? Sequi, aliquid aperiam vero in rerum velit nesciunt.</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-xl-10">
+          <div class="row justify-content-center gy-4 mt-4">
+            <div class="col-lg-4 col-md-6">
+              <div class="grid_service_card">
+                <img src="./assets/img/service-components/graphic-design-component.png" alt="Graphic Design">
+                <h4>Graphic Design</h4>
+                <p>We create visually compelling designs that capture your brand's essence, from logos to packaging,
+                  ensuring a lasting impact on your audience.</p>
+                <div class="text-end">
+                  <a class="see_more" href="#"><i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="grid_service_card">
+                <img src="./assets/img/service-components/web-design-component.png" alt="Website Development">
+                <h4>Website Development</h4>
+                <p>Crafting responsive, user-friendly websites that represent your brand and deliver exceptional user
+                  experiences, optimized for all devices.</p>
+                <div class="text-end">
+                  <a class="see_more" href="#"><i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="grid_service_card">
+                <img src="./assets/img/service-components/social-media-component.png" alt="Video Editing">
+                <h4>Video Editing</h4>
+                <p>Our team brings motion graphics, creative directors, video editors, and sound designers to deliver
+                  world-class storytelling and visuals.</p>
+                <div class="text-end">
+                  <a class="see_more" href="#"><i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="grid_service_card">
+                <img src="./assets/img/service-components/seo-component.png" alt="DIgital Marketing">
+                <h4>Digital Marketing</h4>
+                <p>Enhancing your online visibility with effective SEO strategies and targeted digital marketing
+                  campaigns that drive traffic and increase conversions.</p>
+                <div class="text-end">
+                  <a class="see_more" href="#"><i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="grid_service_card">
+                <img src="./assets/img/service-components/mobile-application-component.png"
+                  alt="Mobile App Development">
+                <h4>Mobile App Development</h4>
+                <p>Enhancing your online visibility with effective SEO strategies and targeted digital marketing
+                  campaigns that drive traffic and increase conversions.</p>
+                <div class="text-end">
+                  <a class="see_more" href="#"><i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container">
+      <div class="text-center">
+        <div class="subheader">
+          <img class="icon" src="./assets/img/subheader-icon.png" alt="Sub header icon">
+          <span class="btn">Our Work</span>
+        </div>
+
+        <h2 class="section_title">Take a Look at <span>Our Work</span></h2>
+        <p class="section_desc mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur reiciendis
+          corrupti veniam? Sequi, aliquid aperiam vero in rerum velit nesciunt.</p>
+      </div>
+
+      <div class="work_gallery mt-5" id="workGallery">
+        <div class="gallery_tab">
+          <span class="item active" data-filter="*">All</span>
+          <span class="item" data-filter=".graphic">Graphics Design</span>
+          <span class="item" data-filter=".website">Website</span>
+          <span class="item" data-filter=".mobile">Mobile App</span>
+          <span class="item" data-filter=".video">Video Editing</span>
+          <span class="item" data-filter=".branding">Branding</span>
+        </div>
+
+        <div class="row justify-content-center gy-4 gallary-grid">
+
+          <div class="col-xl-4 col-md-6 gallary-item graphic">
+            <a class="item" href="javascript:void(0)" data-src="./assets/img/work-gallery/logo-thumbnail-1.jpg">
+              <div class="thumbnail">
+                <img src="./assets/img/work-gallery/logo-thumbnail-1.jpg" alt="Logo Design" title="Logo Design">
+                <span class="label">Logo Design</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-xl-4 col-md-6 gallary-item graphic">
+            <a class="item" href="javascript:void(0)" data-src="./assets/img/work-gallery/logo-thumbnail-1.jpg">
+              <div class="thumbnail">
+                <img src="./assets/img/work-gallery/logo-thumbnail-1.jpg" alt="">
+              </div>
+            </a>
+          </div>
+          <div class="col-xl-4 col-md-6 gallary-item website">
+            <a class="item" href="javascript:void(0)" data-src="./assets/img/work-gallery/logo-thumbnail-1.jpg">
+              <div class="thumbnail">
+                <img src="./assets/img/work-gallery/logo-thumbnail-1.jpg" alt="">
+              </div>
+            </a>
+          </div>
+          <div class="col-xl-4 col-md-6 gallary-item branding">
+            <a class="item" href="javascript:void(0)" data-src="./assets/img/work-gallery/logo-thumbnail-1.jpg">
+              <div class="thumbnail">
+                <img src="./assets/img/work-gallery/logo-thumbnail-1.jpg" alt="">
+              </div>
+            </a>
+          </div>
+
+          <div class="col-xl-4 col-md-6 gallary-item video">
+            <a class="item" href="javascript:void(0)" data-lg-size="1280-720"
+              data-video='{"source": [{"src":"./assets/img/work-gallery/sample-video.mp4","type":"video/mp4"}], "attributes": {"controls": true, "preload": false}}'>
+              <div class="thumbnail">
+                <img src="./assets/img/work-gallery/logo-thumbnail-1.jpg" alt="">
+              </div>
+            </a>
+          </div>
+
+
+
+
+          <div class="col-xl-4 col-md-6 grid-sizer"></div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section blog_post" style="background: #FFF6F6;">
+    <div class="container">
+      <div class="row gy-5">
+        <div class="col-lg-7 text-center text-lg-start">
+          <div class="subheader">
+            <img class="icon" src="./assets/img/subheader-icon.png" alt="Sub header icon">
+            <span class="btn">Blogs</span>
+          </div>
+
+          <h2 class="section_title">Explore <span>Blogs</span> & <span>News</span></h2>
+        </div>
+
+        <div class="col-lg-5 mt-3 mt-lg-auto section_btn_divider text-center text-lg-end">
+          <a class="btn_primary" href="#">More Info</a>
+        </div>
+      </div>
+
+      <div class="row mt-4 gy-4 justify-content-center">
+        <div class="col-lg-4 col-md-6 wow fadeInUp   animated" data-wow-delay="300ms" data-wow-duration="1500ms"
+          style="visibility: visible; animation-duration: 1500ms; animation-delay: 300ms; animation-name: fadeInUp;">
+          <div class="blog_item">
+            <div class="img">
+              <img class="img-fluid" src="./assets/img/blog1.jpg" alt="" title="">
+            </div>
+            <div class="contents">
+              <span class="tag">Branding</span>
+              <h4 class="title_3">Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
+              <p class="blog_desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ea tenetur non modi est
+                fuga quaerat facilis, nihil ullam ex ipsa reprehenderit cumque optio? Illum ex ipsum soluta voluptates
+                at.</p>
+              <a class="read_more" href="#" target="_blank">Continue Reading <i class="fa-solid fa-arrow-right"
+                  aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp   animated" data-wow-delay="300ms" data-wow-duration="1500ms"
+          style="visibility: visible; animation-duration: 1500ms; animation-delay: 300ms; animation-name: fadeInUp;">
+          <div class="blog_item">
+            <div class="img">
+              <img class="img-fluid" src="./assets/img/blog2.jpg" alt="" title="">
+            </div>
+            <div class="contents">
+              <span class="tag">Marketing</span>
+              <h4 class="title_3">Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
+              <p class="blog_desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ea tenetur non modi est
+                fuga quaerat facilis, nihil ullam ex ipsa reprehenderit cumque optio? Illum ex ipsum soluta voluptates
+                at.</p>
+              <a class="read_more" href="#" target="_blank">Continue Reading <i class="fa-solid fa-arrow-right"
+                  aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp   animated" data-wow-delay="300ms" data-wow-duration="1500ms"
+          style="visibility: visible; animation-duration: 1500ms; animation-delay: 300ms; animation-name: fadeInUp;">
+          <div class="blog_item">
+            <div class="img">
+              <img class="img-fluid" src="./assets/img/blog3.jpg" alt="" title="">
+            </div>
+            <div class="contents">
+              <span class="tag">Branding</span>
+              <h4 class="title_3">Lorem ipsum dolor sit, amet consectetur adipisicing.</h4>
+              <p class="blog_desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos ea tenetur non modi est
+                fuga quaerat facilis, nihil ullam ex ipsa reprehenderit cumque optio? Illum ex ipsum soluta voluptates
+                at.</p>
+              <a class="read_more" href="#" target="_blank">Continue Reading <i class="fa-solid fa-arrow-right"
+                  aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section primary-light contact">
+    <div class="container">
+      <div class="text-center">
+        <div class="subheader">
+          <img class="icon" src="./assets/img/subheader-icon.png" alt="Sub header icon">
+          <span class="btn">Contact Us</span>
+        </div>
+
+        <h2 class="section_title">Our <span>Premium</span> Services, Tailored for You</h2>
+      </div>
+
+      <div class="row gx-lg-5 justify-content-between gy-5 mt-4">
+        <div class="col-xl-5 col-lg-6">
+          <div class="contact_info_item mb-4">
+            <div class="icon">
+              <img class="svg" src="./assets/img/location.svg" alt="Location" title="Location">
+            </div>
+            <div class="contents">
+              <h4 class="title_3">Our Location</h4>
+              <p>Nowdapara Bazar, Sopura, Rajshahi</p>
+            </div>
+          </div>
+          <div class="contact_info_item mb-4">
+            <div class="icon">
+              <img class="svg" src="./assets/img/envelope.svg" alt="Email" title="Email">
+            </div>
+            <div class="contents">
+              <h4 class="title_3">Email Address</h4>
+              <a href="mailto:info@artbitsulution.com">info@artbitsulution.com</a>
+            </div>
+          </div>
+          <div class="contact_info_item mb-4">
+            <div class="icon">
+              <img class="svg" src="./assets/img/phone.svg" alt="Phone" title="Phone">
+            </div>
+            <div class="contents">
+              <h4 class="title_3">PHONE NUMBER</h4>
+              <a href="tel:+8801401800800">+880 1401 800 800</a>
+            </div>
+          </div>
+          <div class="social_info_item">
+            <h4>Follow Us on</h4>
+            <ul>
+              <li>
+                <a href="#" target="_blank">
+                  <img class="svg" src="./assets/img/social/facebook.svg" alt="Facebook" title="Facebook">
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <img class="svg" src="./assets/img/social/linkedin.svg" alt="LinkedIn" title="LinkedIn">
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <img class="svg" src="./assets/img/social/twitter.svg" alt="Twitter" title="Twitter">
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <img class="svg" src="./assets/img/social/instagram.svg" alt="Instagram" title="Instagram">
+                </a>
+              </li>
+              <li>
+                <a href="#" target="_blank">
+                  <img class="svg" src="./assets/img/social/youtube.svg" alt="YouTube" title="YouTube">
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+          <div class="contact_form_box">
+            <div class="header text-center">
+              <h5>Have you any Plan?</h5>
+              <h4>We’d love to learn more about you and what you’re looking for.</h4>
+            </div>
+
+            <form action="">
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="input-container">
+                    <input type="text" name="fname" class="input">
+                    <label for="">First Name</label>
+                    <span>First Name</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-container">
+                    <input type="text" name="lname" class="input">
+                    <label for="">Last Name</label>
+                    <span>Last Name</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-container">
+                    <input type="email" name="email" class="input">
+                    <label for="">Email</label>
+                    <span>Email</span>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="input-container">
+                    <input type="text" name="phone" class="input">
+                    <label for="">Phone</label>
+                    <span>Phone</span>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <select class="form-select" aria-label="Looking For">
+                    <option selected>Looking For</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <select class="form-select" aria-label="Budget">
+                    <option selected>Budget</option>
+                    <option value="100">$100</option>
+                    <option value="200">$200</option>
+                    <option value="300">$300</option>
+                    <option value="400">$400</option>
+                    <option value="500">$500</option>
+                  </select>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="input-container textarea">
+                    <textarea name="message" class="input"></textarea>
+                    <label for="">Message</label>
+                    <span>Message</span>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="text-center mt-4">
+                <a class="btn_primary w-100" href="#">Send Message</a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- <section class="">
+    <div class="large-container">
+
+    </div>
+  </section> -->
+
+  <div class="ready_to_work_box">
+    <h3>Ready To start Work With US</h3>
+    <p class="desc">Please feel free to contact us we will be glad to hear you.</p>
+    <a class="btn_secondary white" href="#" style="min-width: 200px;">Contact Us</a>
+  </div>
+
+
+  <footer class="footer">
+
+    <div class="container">
+      <div class="row gy-4 gx-xl-5">
+        <div class="col-xl-4 col-lg-4 col-md-6">
+          <div class="footer_widget">
+            <div class="logo mb-4">
+              <a href="#"><img src="./assets/img/logo-white.png" width="180" alt="Artbit Solutions"
+                  title="Artbit Solutions"></a>
+            </div>
+            <p class="desc"><b style="color: #fff;">artBit Solution</b> is an IT company specializing in graphics
+              design, web and mobile
+              development, and video editing, delivering innovative solutions to clients worldwide.</p>
+            <div class="social">
+              <ul>
+                <li>
+                  <a href="#" target="_blank">
+                    <img class="svg" src="./assets/img/social/facebook.svg" alt="Facebook" title="Facebook">
+                  </a>
+                </li>
+                <li>
+                  <a href="#" target="_blank">
+                    <img class="svg" src="./assets/img/social/linkedin.svg" alt="LinkedIn" title="LinkedIn">
+                  </a>
+                </li>
+                <li>
+                  <a href="#" target="_blank">
+                    <img class="svg" src="./assets/img/social/twitter.svg" alt="Twitter" title="Twitter">
+                  </a>
+                </li>
+                <li>
+                  <a href="#" target="_blank">
+                    <img class="svg" src="./assets/img/social/instagram.svg" alt="Instagram" title="Instagram">
+                  </a>
+                </li>
+                <li>
+                  <a href="#" target="_blank">
+                    <img class="svg" src="./assets/img/social/youtube.svg" alt="YouTube" title="YouTube">
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+
+            <a class="btn_primary footer_btn" href="https://wa.me/1401800800"><img class="svg"
+                src="./assets/img/social/whatsapp.svg" alt="whatsapp" title="whatsapp"> +880 1401 800 800</a>
+          </div>
+        </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6">
+          <div class="footer_widget">
+            <h4 class="title_4">Quick Links</h4>
+            <ul class="links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Portfolio</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-4 col-md-6">
+          <div class="footer_widget">
+            <h4 class="title_4">Services</h4>
+            <ul class="links">
+              <li><a href="#">Graphics Design</a></li>
+              <li><a href="#">Video Editing</a></li>
+              <li><a href="#">Mobile App Development</a></li>
+              <li><a href="#">Website Development</a></li>
+              <li><a href="#">Digital Marketing</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-4 col-md-6">
+          <div class="footer_widget">
+            <h4 class="title_4">Newsletter</h4>
+            <p class="desc">Subscribe to our newsletter to get the latest updates and offers.</p>
+
+            <form action="" class="newsletter_form mt-4">
+              <div class="input-with-button">
+                <input type="text" placeholder="Enter Your E-mail" class="input-field">
+                <button type="submit" class="action-button"><img class="svg" src="./assets/img/send.svg" width="20"
+                    height="20" alt=""></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright_wrap">
+        <hr>
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-3">
+          <p class="desc text-white">© 2025 Artbit Solutions. All Rights Reserved.</p>
+          <div class="footer_menu">
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms & Conditions</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- jQuery 3.7.1 CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- Bootstrap 5.3.3 JS Bundle CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="./assets/js/main.js"></script>
+
+
+  <!-- LightGallery Core -->
+  <link href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.umd.min.js"></script>
+
+  <!-- Optional Plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/video/lg-video.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/zoom/lg-zoom.umd.min.js"></script>
+
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var gridElem = document.querySelector('.gallary-grid');
+      if (!gridElem) return;
+
+      // Wait for images
+      imagesLoaded(gridElem, function () {
+        // Initialize Isotope
+        var iso = new Isotope(gridElem, {
+          itemSelector: '.gallary-item',
+          percentPosition: true,
+          masonry: { columnWidth: '.grid-sizer' },
+          transitionDuration: '550ms'
+        });
+
+
+        // Initialize LightGallery on grid
+        var lightGalleryInstance = lightGallery(gridElem, {
+          selector: '.item',
+          download: false,
+          plugins: [lgZoom, lgThumbnail, lgVideo],
+          speed: 400,
+          licenseKey: '0000-0000-000-0000', // can be left blank for personal/non-commercial
+        });
+
+        // Filter buttons
+        var tabs = document.querySelectorAll('#workGallery .gallery_tab .item');
+        tabs.forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            tabs.forEach(function (t) { t.classList.remove('active'); });
+            tab.classList.add('active');
+
+            var filterValue = tab.getAttribute('data-filter') || '*';
+            iso.arrange({ filter: filterValue });
+
+            // After filtering, refresh LightGallery to include only visible items
+            imagesLoaded(gridElem, function () {
+              iso.layout();
+              lightGalleryInstance.refresh();
+            });
+          });
+        });
+
+        // Re-layout on resize
+        var resizeDebounce;
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeDebounce);
+          resizeDebounce = setTimeout(function () {
+            iso.layout();
+          }, 150);
+        });
+      });
+    });
+  </script>
+
+
+
+</body>
+
+</html>

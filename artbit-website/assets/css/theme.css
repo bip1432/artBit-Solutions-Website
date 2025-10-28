@@ -287,7 +287,6 @@ img {
   font-size: 68px;
   font-weight: 500;
   color: var(--header);
-  text-transform: uppercase;
 }
 
 .title>span {
@@ -322,6 +321,11 @@ img {
 }
 
 
+.section_desc{
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 /** buttons **/
 
 .btn_primary {
@@ -335,7 +339,6 @@ img {
   padding: 12px 40px;
   text-align: center;
   cursor: pointer;
-  border: 1px solid transparent;
   border-radius: 5px;
   z-index: 1;
   transition: all 500ms ease;
@@ -361,9 +364,6 @@ img {
   left: 0px;
 }
 
-.btn_primary:hover{
-  border-color: var(--secondary);
-}
 
 
 .btn_secondary {

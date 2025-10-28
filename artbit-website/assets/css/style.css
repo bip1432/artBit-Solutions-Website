@@ -1223,7 +1223,7 @@ textarea.input {
 
 
 @media screen and (max-width: 574px) {
-  .contact_form_box{
+  .contact_form_box {
     padding: 20px;
   }
 }
@@ -1401,4 +1401,169 @@ textarea.input {
   font-size: 16px;
   color: var(--font);
   margin-bottom: 15px;
+}
+
+
+/* Services Page  */
+
+.single_page_hero {
+  min-height: 600px;
+  background-color: var(--primary);
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 50px 0;
+  display: flex;
+  align-items: center;
+}
+
+.single_page_hero.services {
+  background-image: url('../img/services/services-hero-banner.png');
+}
+.single_page_hero.video_eiditing {
+  background-image: url('../img/video-editing/video-eiditing-hero-banner.png');
+}
+
+.single_page_hero .title {
+  color: var(--white);
+  font-size: 54px;
+  margin-top: 20px;
+}
+
+.single_page_hero .subtitle {
+  color: var(--white);
+  font-size: 32px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: "Carattere", cursive;
+}
+
+.single_page_hero .desc {
+  color: var(--white);
+  font-size: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+
+.section.services_grid {
+  background-image: url('../img/hero_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.grid_service_card {
+  position: relative;
+  background: var(--white);
+  padding: 20px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.grid_service_card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160.73deg, #B1E4FF 14.41%, #FFFFFF 39.97%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+.grid_service_card:hover::before {
+  opacity: 1;
+}
+
+.grid_service_card:hover {
+  transform: translateY(-5px);
+  border-color: #B1E4FF;
+}
+
+.grid_service_card>* {
+  position: relative;
+  z-index: 1;
+}
+
+.grid_service_card img {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+.grid_service_card h4 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.grid_service_card p {
+  font-size: 15px;
+}
+
+.grid_service_card .see_more {
+  display: inline-block;
+  background: var(--bg-primary-light);
+  padding: 5px 12px;
+  border-radius: 6px;
+  color: var(--header);
+  margin-top: 10px;
+  transition: all .3s ease;
+}
+
+.grid_service_card:hover .see_more {
+  background: var(--primary);
+  color: var(--white);
+}
+
+
+/* Work gallery */
+
+.gallery_tab {
+  background: var(--bg-primary-light);
+  padding: 20px 25px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gallery_tab .item {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all .3s ease;
+}
+
+.gallery_tab .item.active,
+.gallery_tab .item:hover {
+  background: var(--tertiary);
+  color: var(--white);
+}
+
+.work_gallery .gallary-item .item .thumbnail{
+  position: relative;
+}
+.work_gallery .gallary-item .item .thumbnail img {
+  max-height: 400px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+.work_gallery .gallary-item .item .thumbnail .label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  padding: 8px 12px;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 0 6px 0 6px;
+  font-size: 15px;
 }

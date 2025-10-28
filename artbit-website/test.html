@@ -1,50 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Button with Animated Border</title>
-<style>
-.button {
-  position: relative;
-  padding: 14px 32px;
-  border: none;
-  border-radius: 12px;
-  background: #e6eaff;
-  color: #0033cc;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: conic-gradient(
-    #00ff3c 0deg 60deg,
-    transparent 61deg 360deg
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-</style>
+  <meta charset="utf-8">
+  <title>LightGallery local mp4 test</title>
+  <link href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css" rel="stylesheet">
+  <style>
+    .thumbnail{ position:relative; border-radius:8px; overflow:hidden; width:320px; }
+    .thumbnail img{ display:block; width:100%; height:auto; }
+    .play-icon{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-size:36px; color:#fff; }
+  </style>
 </head>
-<body style="display:flex;justify-content:center;align-items:center;height:100vh;background:#f8f9fa;">
+<body>
 
-<button class="button">START PROJECT</button>
+<div class="gallary-grid" id="testGrid">
+  <div class="grid-sizer"></div>
 
+  <div class="col gallary-item video">
+    <!-- IMPORTANT: href points directly to the mp4 file -->
+    <a class="item"
+       href="./assets/img/work-gallery/sample-video.mp4"
+       data-lg-size="1280-720"
+       data-poster="./assets/img/work-gallery/video-thumb.jpg"
+       title="Local MP4">
+      <div class="thumbnail">
+        <img src="./assets/img/work-gallery/video-thumb.jpg" alt="Video Thumbnail">
+        <span class="play-icon">▶</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/video/lg-video.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/zoom/lg-zoom.umd.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var gridElem = document.getElementById('testGrid');
+  imagesLoaded(gridElem, function () {
+    // init isotope (optional)
+    var iso = new Isotope(gridElem, {
+      itemSelector: '.gallary-item',
+      percentPosition: true,
+      masonry: { columnWidth: '.grid-sizer' },
+      transitionDuration: '550ms'
+    });
+
+    // init lightGallery with video plugin
+    var lg = lightGallery(gridElem, {
+      selector: '.item',
+      plugins: [lgVideo, lgThumbnail, lgZoom],
+      speed: 400,
+      download: false
+    });
+
+    // If you later filter with isotope, call lg.refresh();
+  });
+});
+</script>
 </body>
 </html>
