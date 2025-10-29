@@ -1,66 +1,293 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>LightGallery local mp4 test</title>
-  <link href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css" rel="stylesheet">
-  <style>
-    .thumbnail{ position:relative; border-radius:8px; overflow:hidden; width:320px; }
-    .thumbnail img{ display:block; width:100%; height:auto; }
-    .play-icon{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-size:36px; color:#fff; }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Stacked sticky cards — header + visible tabs</title>
+<style>
+  :root{
+    --page-max: 1200px;
+    --page-pad: 32px;
+    --header-height: 120px;   /* space reserved at top for the page header */
+    --tab-gap: 28px;          /* vertical gap between visible card headers */
+    --card-radius: 16px;
+    --card-height: 360px;     /* visual card height */
+  }
+
+  *{box-sizing:border-box}
+  body{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial; margin:0; background:#fafafa; color:#111}
+  .page{
+    max-width: var(--page-max);
+    margin: 40px auto;
+    padding: 0 var(--page-pad);
+  }
+
+  /* --- Top section header (title) --- */
+  .hero{
+    height: var(--header-height);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    gap:8px;
+    margin-bottom: 18px;
+  }
+  .eyebrow{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid #9ce7bf;
+    color:#18a65f;
+    font-weight:600;
+    font-size:13px;
+  }
+  h1{font-size:40px; margin:0; letter-spacing:-0.02em}
+  h1 .italic{font-style:italic; font-weight:600; display:block; margin-top:6px; color:#222}
+
+  /* container for stacked sections */
+  .stack {
+    position:relative;
+    margin-top: 18px;
+  }
+
+  /* each slot that produces enough scroll space for one card */
+  .section {
+    height: calc(var(--card-height) + 1.6 * 100vh); /* generous scroll room so each card pins and then releases */
+    margin: 0;
+  }
+
+  /* actual card that becomes sticky; we will vary top with nth-child so the tabs stack */
+  .card {
+    position: sticky;
+    left: 0;
+    right: 0;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 24px;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: calc(var(--page-max) - var(--page-pad) * 2);
+    padding: 28px;
+    min-height: var(--card-height);
+    border-radius: var(--card-radius);
+    box-shadow: 0 10px 30px rgba(14,20,40,0.06);
+    transition: transform 600ms cubic-bezier(.2,.9,.25,1), opacity 420ms ease;
+    opacity: 0;
+    transform: translateY(18px) scale(.995);
+    overflow: visible;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.03);
+  }
+
+  /* top offsets per card so small header portion remains visible (tabs) */
+  /* NOTE: nth-child is applied to section, since markup is <section><article class="card"> */
+  .section:nth-child(1) .card { top: calc(var(--header-height) + 0 * var(--tab-gap)); z-index: 30; }
+  .section:nth-child(2) .card { top: calc(var(--header-height) + 1 * var(--tab-gap)); z-index: 31; }
+  .section:nth-child(3) .card { top: calc(var(--header-height) + 2 * var(--tab-gap)); z-index: 32; }
+  .section:nth-child(4) .card { top: calc(var(--header-height) + 3 * var(--tab-gap)); z-index: 33; }
+  .section:nth-child(5) .card { top: calc(var(--header-height) + 4 * var(--tab-gap)); z-index: 34; }
+
+  /* card visible state (added by JS) */
+  .card.in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* small visual tab/kicker - will remain visible when card is pinning */
+  .kicker {
+    font-style: italic;
+    color: rgba(0,0,0,0.6);
+    margin-bottom: 8px;
+    font-size:16px;
+  }
+
+  h2 { margin: 6px 0 12px; font-size:30px; letter-spacing:-0.02em }
+  p.lead { margin: 0 0 18px; color: rgba(0,0,0,0.6); max-width:60ch; line-height:1.6; }
+
+  .right { display:flex; align-items:center; justify-content:center; }
+  .mock {
+    width: 100%;
+    height: 260px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.05));
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:16px;
+  }
+
+  .meta{ display:flex; gap:12px; align-items:center; margin-top:12px }
+  .avatar{ width:44px; height:44px; border-radius:10px; background:white; display:inline-grid; place-items:center; font-weight:700; box-shadow:0 4px 10px rgba(0,0,0,0.07) }
+
+  /* make the top corner rounded and visually show tab */
+  .card::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: calc(var(--tab-gap) * 0.9);
+    top: calc(-1 * var(--tab-gap) / 3); /* tiny reveal to emphasize tabs */
+    border-radius: 14px 14px 0 0;
+    pointer-events:none;
+    background: linear-gradient(90deg, rgba(255,255,255,0.25), rgba(255,255,255,0.02));
+    opacity: 0.5;
+  }
+
+  /* different background colors for clarity (customize as you like) */
+  .section:nth-child(1) .card { background: linear-gradient(90deg,#dbe7ff,#e7edff); }
+  .section:nth-child(2) .card { background: linear-gradient(90deg,#ffd8d8,#ffecec); }
+  .section:nth-child(3) .card { background: linear-gradient(90deg,#fff0b8,#fff7d9); }
+  .section:nth-child(4) .card { background: linear-gradient(90deg,#c8fbff,#e7ffff); }
+  .section:nth-child(5) .card { background: linear-gradient(90deg,#dfffe0,#f6fff1); }
+
+  /* responsive: stack columns */
+  @media (max-width: 980px){
+    .card { grid-template-columns: 1fr; padding:20px; gap:14px }
+    .right { order:-1; }
+  }
+  @media (max-width:480px){
+    h1{ font-size:22px }
+    h2{ font-size:20px }
+    .mock{ height:160px }
+  }
+</style>
 </head>
 <body>
+  <main class="page">
+    <header class="hero">
+      <div class="eyebrow">Industry Wins</div>
+      <h1>Proven Success In <span class="italic">Every Industry</span></h1>
+    </header>
 
-<div class="gallary-grid" id="testGrid">
-  <div class="grid-sizer"></div>
+    <div class="stack" id="stack">
+      <!-- SECTION 1 -->
+      <section class="section">
+        <article class="card" data-index="1">
+          <div class="left">
+            <div class="kicker">Travel</div>
+            <h2>Easy Booking for Dream Trips</h2>
+            <p class="lead">Triply is a hassle-free & effective tour solution for travelers. It's an all-inclusive booking and planning website that helps people make their dream trips easier.</p>
+            <div style="display:flex;gap:48px">
+              <div>
+                <div style="color:#333;font-weight:700">Pages in Projects</div>
+                <div style="font-size:20px;margin-top:6px">40+</div>
+              </div>
+              <div>
+                <div style="color:#333;font-weight:700">Retention Growth</div>
+                <div style="font-size:20px;margin-top:6px">36%</div>
+              </div>
+            </div>
+            <div class="meta">
+              <div class="avatar">S</div>
+              <div>
+                <div style="font-weight:700">Shubho Al-Farqque</div>
+                <div style="font-size:13px;color:rgba(0,0,0,0.6)">Triply CEO</div>
+              </div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="mock">Tablet mock / image</div>
+          </div>
+        </article>
+      </section>
 
-  <div class="col gallary-item video">
-    <!-- IMPORTANT: href points directly to the mp4 file -->
-    <a class="item"
-       href="./assets/img/work-gallery/sample-video.mp4"
-       data-lg-size="1280-720"
-       data-poster="./assets/img/work-gallery/video-thumb.jpg"
-       title="Local MP4">
-      <div class="thumbnail">
-        <img src="./assets/img/work-gallery/video-thumb.jpg" alt="Video Thumbnail">
-        <span class="play-icon">▶</span>
-      </div>
-    </a>
-  </div>
-</div>
+      <!-- SECTION 2 -->
+      <section class="section">
+        <article class="card" data-index="2">
+          <div class="left">
+            <div class="kicker">Restaurant</div>
+            <h2>Transform Your Dining</h2>
+            <p class="lead">At Plate, we bring you a handpicked selection of premium restaurants and a delightful ordering flow to increase conversion and retention.</p>
+            <div class="meta">
+              <div class="avatar">M</div>
+              <div><div style="font-weight:700">Maya</div><div style="font-size:13px;color:rgba(0,0,0,0.6)">Founder</div></div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="mock">Phone mock / image</div>
+          </div>
+        </article>
+      </section>
 
-<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
-<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+      <!-- SECTION 3 -->
+      <section class="section">
+        <article class="card" data-index="3">
+          <div class="left">
+            <div class="kicker">SaaS</div>
+            <h2>Reducing Carbon Footprints</h2>
+            <p class="lead">Smart SaaS product for enterprise energy monitoring — dashboards, alerts and easy integrations to reduce operational emissions.</p>
+            <div class="meta">
+              <div class="avatar">R</div>
+              <div><div style="font-weight:700">Rafi</div><div style="font-size:13px;color:rgba(0,0,0,0.6)">Product Lead</div></div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="mock">Desktop mock / image</div>
+          </div>
+        </article>
+      </section>
 
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/video/lg-video.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/zoom/lg-zoom.umd.min.js"></script>
+      <!-- SECTION 4 -->
+      <section class="section">
+        <article class="card" data-index="4">
+          <div class="left">
+            <div class="kicker">Healthcare</div>
+            <h2>Revolutionize Fitness Goals</h2>
+            <p class="lead">Fitmate transforms fitness with flexible gym access, personalized schedules, and AI-driven insights to help users get results faster.</p>
+            <div class="meta">
+              <div class="avatar">A</div>
+              <div><div style="font-weight:700">Asha</div><div style="font-size:13px;color:rgba(0,0,0,0.6)">CEO</div></div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="mock">Phone mock / image</div>
+          </div>
+        </article>
+      </section>
+
+      <!-- SECTION 5 -->
+      <section class="section">
+        <article class="card" data-index="5">
+          <div class="left">
+            <div class="kicker">Vehicle</div>
+            <h2>Simplifying Vehicle Care</h2>
+            <p class="lead">A platform for vehicle maintenance with booking, reminders and repair tracking that increases retention and trust.</p>
+            <div class="meta">
+              <div class="avatar">B</div>
+              <div><div style="font-weight:700">Bipul</div><div style="font-size:13px;color:rgba(0,0,0,0.6)">Product Manager</div></div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="mock">Illustration / image</div>
+          </div>
+        </article>
+      </section>
+
+    </div>
+  </main>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  var gridElem = document.getElementById('testGrid');
-  imagesLoaded(gridElem, function () {
-    // init isotope (optional)
-    var iso = new Isotope(gridElem, {
-      itemSelector: '.gallary-item',
-      percentPosition: true,
-      masonry: { columnWidth: '.grid-sizer' },
-      transitionDuration: '550ms'
+  // Reveal animation: when each section's top crosses the viewport we add .in to its card.
+  // We keep previous cards visible so they remain pinned and overlapped by later ones.
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.section');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const card = entry.target.querySelector('.card');
+        if (!card) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.15) {
+          card.classList.add('in');
+        } else {
+          // optional: remove .in when far out of view
+          // card.classList.remove('in');
+        }
+      });
+    }, {
+      root: null,
+      threshold: [0.02, 0.15, 0.5]
     });
 
-    // init lightGallery with video plugin
-    var lg = lightGallery(gridElem, {
-      selector: '.item',
-      plugins: [lgVideo, lgThumbnail, lgZoom],
-      speed: 400,
-      download: false
-    });
-
-    // If you later filter with isotope, call lg.refresh();
+    sections.forEach(sec => observer.observe(sec));
   });
-});
 </script>
 </body>
 </html>
