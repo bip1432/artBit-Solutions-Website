@@ -1,293 +1,530 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Stacked sticky cards — header + visible tabs</title>
-<style>
-  :root{
-    --page-max: 1200px;
-    --page-pad: 32px;
-    --header-height: 120px;   /* space reserved at top for the page header */
-    --tab-gap: 28px;          /* vertical gap between visible card headers */
-    --card-radius: 16px;
-    --card-height: 360px;     /* visual card height */
-  }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Our Process — Manual CSS connectors</title>
 
-  *{box-sizing:border-box}
-  body{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial; margin:0; background:#fafafa; color:#111}
-  .page{
-    max-width: var(--page-max);
-    margin: 40px auto;
-    padding: 0 var(--page-pad);
-  }
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-  /* --- Top section header (title) --- */
-  .hero{
-    height: var(--header-height);
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    gap:8px;
-    margin-bottom: 18px;
-  }
-  .eyebrow{
-    display:inline-block;
-    padding:6px 12px;
-    border-radius:999px;
-    border:1px solid #9ce7bf;
-    color:#18a65f;
-    font-weight:600;
-    font-size:13px;
-  }
-  h1{font-size:40px; margin:0; letter-spacing:-0.02em}
-  h1 .italic{font-style:italic; font-weight:600; display:block; margin-top:6px; color:#222}
+  <style>
+    :root {
+      --hex-w: 220px;
+      --hex-h: 200px;
+      --accent: #0d6efd;
+      --bg: #fff;
+      --shadow: 0 6px 18px rgba(11, 28, 60, .06);
+      --anim: 300ms cubic-bezier(.22, .9, .36, 1);
+    }
 
-  /* container for stacked sections */
-  .stack {
-    position:relative;
-    margin-top: 18px;
-  }
+    body {
+      background: linear-gradient(180deg, #fff 0%, #f7f3fb 100%);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      color: #063b6b;
+    }
 
-  /* each slot that produces enough scroll space for one card */
-  .section {
-    height: calc(var(--card-height) + 1.6 * 100vh); /* generous scroll room so each card pins and then releases */
-    margin: 0;
-  }
+    .our-process {
+      padding: 72px 12px;
+    }
 
-  /* actual card that becomes sticky; we will vary top with nth-child so the tabs stack */
-  .card {
-    position: sticky;
-    left: 0;
-    right: 0;
-    display: grid;
-    grid-template-columns: 1fr 420px;
-    gap: 24px;
-    align-items: center;
-    margin: 0 auto;
-    width: 100%;
-    max-width: calc(var(--page-max) - var(--page-pad) * 2);
-    padding: 28px;
-    min-height: var(--card-height);
-    border-radius: var(--card-radius);
-    box-shadow: 0 10px 30px rgba(14,20,40,0.06);
-    transition: transform 600ms cubic-bezier(.2,.9,.25,1), opacity 420ms ease;
-    opacity: 0;
-    transform: translateY(18px) scale(.995);
-    overflow: visible;
-    background: white;
-    border: 1px solid rgba(0,0,0,0.03);
-  }
+    .process-wrap {
+      position: relative;
+      padding-bottom: 80px;
+    }
 
-  /* top offsets per card so small header portion remains visible (tabs) */
-  /* NOTE: nth-child is applied to section, since markup is <section><article class="card"> */
-  .section:nth-child(1) .card { top: calc(var(--header-height) + 0 * var(--tab-gap)); z-index: 30; }
-  .section:nth-child(2) .card { top: calc(var(--header-height) + 1 * var(--tab-gap)); z-index: 31; }
-  .section:nth-child(3) .card { top: calc(var(--header-height) + 2 * var(--tab-gap)); z-index: 32; }
-  .section:nth-child(4) .card { top: calc(var(--header-height) + 3 * var(--tab-gap)); z-index: 33; }
-  .section:nth-child(5) .card { top: calc(var(--header-height) + 4 * var(--tab-gap)); z-index: 34; }
+    /* Start badge */
+    .start-badge {
+      position: absolute;
+      left: 24px;
+      top: 120px;
+      z-index: 50;
+      transform: rotate(-18deg);
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 2px solid rgba(13, 110, 253, 0.22);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 253, 255, 0.95));
+      box-shadow: 0 8px 22px rgba(13, 110, 253, 0.04);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 14px;
+      pointer-events: none;
+    }
 
-  /* card visible state (added by JS) */
-  .card.in {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+    /* GRID layout for large screens (4 top, 3 bottom reversed under columns 2..4) */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, var(--hex-w));
+      gap: 28px 28px;
+      justify-content: center;
+      align-items: start;
+      position: relative;
+      z-index: 40;
+      /* above connectors */
+      margin-top: 8px;
+    }
 
-  /* small visual tab/kicker - will remain visible when card is pinning */
-  .kicker {
-    font-style: italic;
-    color: rgba(0,0,0,0.6);
-    margin-bottom: 8px;
-    font-size:16px;
-  }
+    /* For smaller screens we switch to flex-wrap so items flow automatically */
+    @media (max-width: 991.98px) {
+      .process-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
 
-  h2 { margin: 6px 0 12px; font-size:30px; letter-spacing:-0.02em }
-  p.lead { margin: 0 0 18px; color: rgba(0,0,0,0.6); max-width:60ch; line-height:1.6; }
+    .hex {
+      width: var(--hex-w);
+      height: var(--hex-h);
+      -webkit-clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+      clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+      background: var(--bg);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--anim);
+      min-width: 0;
+    }
 
-  .right { display:flex; align-items:center; justify-content:center; }
-  .mock {
-    width: 100%;
-    height: 260px;
-    border-radius: 12px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.05));
-    display:flex; align-items:center; justify-content:center;
-    font-weight:700; font-size:16px;
-  }
+    .hex-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 18px;
+      text-align: center;
+      pointer-events: none;
+    }
 
-  .meta{ display:flex; gap:12px; align-items:center; margin-top:12px }
-  .avatar{ width:44px; height:44px; border-radius:10px; background:white; display:inline-grid; place-items:center; font-weight:700; box-shadow:0 4px 10px rgba(0,0,0,0.07) }
+    .step-number {
+      font-weight: 800;
+      font-size: 34px;
+      color: var(--accent);
+      border: 6px double rgba(13, 110, 253, 0.12);
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: #fff;
+      transition: transform var(--anim);
+    }
 
-  /* make the top corner rounded and visually show tab */
-  .card::before{
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: calc(var(--tab-gap) * 0.9);
-    top: calc(-1 * var(--tab-gap) / 3); /* tiny reveal to emphasize tabs */
-    border-radius: 14px 14px 0 0;
-    pointer-events:none;
-    background: linear-gradient(90deg, rgba(255,255,255,0.25), rgba(255,255,255,0.02));
-    opacity: 0.5;
-  }
+    .icon {
+      font-size: 34px;
+      color: var(--accent);
+      transition: transform var(--anim);
+    }
 
-  /* different background colors for clarity (customize as you like) */
-  .section:nth-child(1) .card { background: linear-gradient(90deg,#dbe7ff,#e7edff); }
-  .section:nth-child(2) .card { background: linear-gradient(90deg,#ffd8d8,#ffecec); }
-  .section:nth-child(3) .card { background: linear-gradient(90deg,#fff0b8,#fff7d9); }
-  .section:nth-child(4) .card { background: linear-gradient(90deg,#c8fbff,#e7ffff); }
-  .section:nth-child(5) .card { background: linear-gradient(90deg,#dfffe0,#f6fff1); }
+    .title {
+      font-weight: 600;
+      font-size: 13px;
+      color: #063b6b;
+      transition: transform var(--anim);
+    }
 
-  /* responsive: stack columns */
-  @media (max-width: 980px){
-    .card { grid-template-columns: 1fr; padding:20px; gap:14px }
-    .right { order:-1; }
-  }
-  @media (max-width:480px){
-    h1{ font-size:22px }
-    h2{ font-size:20px }
-    .mock{ height:160px }
-  }
-</style>
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(13, 110, 253, 0.98), rgba(11, 92, 210, 0.98));
+      color: #fff;
+      transform: translateX(-110%);
+      transition: transform var(--anim);
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      text-align: left;
+    }
+
+    .overlay .desc {
+      transform: translateX(-8px);
+      transition: transform var(--anim);
+      max-width: 92%;
+    }
+
+    .overlay h5 {
+      margin: 0 0 6px;
+      font-size: 16px;
+    }
+
+    .overlay p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.4;
+      opacity: .95;
+    }
+
+    .hex:hover,
+    .hex.active {
+      transform: translateY(-6px);
+    }
+
+    .hex:hover .step-number,
+    .hex.active .step-number {
+      transform: translateX(-28px);
+    }
+
+    .hex:hover .icon,
+    .hex.active .icon {
+      transform: translateX(-22px);
+    }
+
+    .hex:hover .title,
+    .hex.active .title {
+      transform: translateX(22px);
+    }
+
+    .hex:hover .overlay,
+    .hex.active .overlay {
+      transform: translateX(0%);
+    }
+
+    .hex:hover .overlay .desc,
+    .hex.active .overlay .desc {
+      transform: translateX(0);
+    }
+
+    /* Connector images (single line image used multiple times).
+     Each connector uses CSS variables to set position/width/rotation.
+     Edit the connector rules below to tweak. */
+    .connector {
+      position: absolute;
+      height: 16px;
+      /* match your line.png height (or scale it) */
+      z-index: 30;
+      /* behind hexes (z=40) */
+      pointer-events: none;
+      object-fit: cover;
+      transform-origin: 0 50%;
+    }
+
+    /* ---- MANUAL CONNECTOR POSITIONS ----
+     Each rule below controls a specific connector image.
+     Edit these four variables to adjust: --left, --top, --w (px), --rot (deg)
+     Example: left: 40%; top: 22%; width: 260px; transform: translate(0,-50%) rotate(12deg);
+  */
+
+    /* connector start -> 01 */
+    #conn-start {
+      left: 6%;
+      top: 28%;
+      width: 130px;
+      transform: translate(0, -50%) rotate(-20deg);
+    }
+
+    /* connectors between top items: 01->02, 02->03, 03->04 */
+    #conn-1-2 {
+      left: 18%;
+      top: 22%;
+      width: 200px;
+      transform: translate(0, -50%) rotate(4deg);
+    }
+
+    #conn-2-3 {
+      left: 34.5%;
+      top: 22%;
+      width: 200px;
+      transform: translate(0, -50%) rotate(4deg);
+    }
+
+    #conn-3-4 {
+      left: 51%;
+      top: 22%;
+      width: 200px;
+      transform: translate(0, -50%) rotate(4deg);
+    }
+
+    /* connector from top-right (04) down to bottom-right (05) */
+    #conn-4-5 {
+      left: 71%;
+      top: 32%;
+      width: 180px;
+      transform: translate(0, -50%) rotate(55deg);
+    }
+
+    /* bottom row connectors: 07->06 and 06->05 (note bottom order is reversed: 7 6 5) */
+    #conn-7-6 {
+      left: 50%;
+      top: 58%;
+      width: 190px;
+      transform: translate(0, -50%) rotate(-6deg);
+    }
+
+    #conn-6-5 {
+      left: 60%;
+      top: 58%;
+      width: 190px;
+      transform: translate(0, -50%) rotate(-6deg);
+    }
+
+    /* responsive tweaks you will almost certainly want to adjust */
+    @media (max-width: 1200px) {
+      :root {
+        --hex-w: 190px;
+        --hex-h: 170px;
+      }
+
+      /* tweak connectors */
+      #conn-1-2 {
+        left: 16%;
+        top: 20%;
+        width: 170px;
+      }
+
+      #conn-2-3 {
+        left: 34%;
+        top: 20%;
+        width: 170px;
+      }
+
+      #conn-3-4 {
+        left: 51%;
+        top: 20%;
+        width: 170px;
+      }
+
+      #conn-4-5 {
+        left: 74%;
+        top: 30%;
+        width: 150px;
+        transform: translate(0, -50%) rotate(50deg);
+      }
+
+      #conn-start {
+        left: 5.5%;
+        top: 24%;
+        width: 110px;
+        transform: translate(0, -50%) rotate(-20deg);
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --hex-w: 160px;
+        --hex-h: 140px;
+      }
+
+      /* switch to flex-wrap layout — connectors hidden to avoid overlap */
+      .connector {
+        display: none;
+      }
+
+      .start-badge {
+        left: 8px;
+        top: 42px;
+        transform: rotate(-18deg) scale(.95);
+      }
+    }
+
+    /* helper: grid placement for items on large screens */
+    @media (min-width: 992px) {
+
+      /* place 1..4 in top row columns 1..4 */
+      .hex.item-1 {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .hex.item-2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .hex.item-3 {
+        grid-column: 3;
+        grid-row: 1;
+      }
+
+      .hex.item-4 {
+        grid-column: 4;
+        grid-row: 1;
+      }
+
+      /* bottom row: put 7,6,5 in columns 2,3,4 respectively so 4 hangs above 5 */
+      .hex.item-7 {
+        grid-column: 2;
+        grid-row: 2;
+      }
+
+      .hex.item-6 {
+        grid-column: 3;
+        grid-row: 2;
+      }
+
+      .hex.item-5 {
+        grid-column: 4;
+        grid-row: 2;
+      }
+    }
+
+    /* on small screens, just let DOM order flow (we use original order 1..7) */
+    @media (max-width: 991.98px) {
+
+      .hex.item-1,
+      .hex.item-2,
+      .hex.item-3,
+      .hex.item-4,
+      .hex.item-5,
+      .hex.item-6,
+      .hex.item-7 {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+
+    /* hide connectors on very small screens (optional) */
+    @media (max-width:480px) {
+      .connector {
+        display: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <main class="page">
-    <header class="hero">
-      <div class="eyebrow">Industry Wins</div>
-      <h1>Proven Success In <span class="italic">Every Industry</span></h1>
-    </header>
+  <section class="our-process">
+    <div class="container process-wrap">
+      <h2 class="text-center mb-4" style="color:#073763; font-weight:700;">Our Process</h2>
 
-    <div class="stack" id="stack">
-      <!-- SECTION 1 -->
-      <section class="section">
-        <article class="card" data-index="1">
-          <div class="left">
-            <div class="kicker">Travel</div>
-            <h2>Easy Booking for Dream Trips</h2>
-            <p class="lead">Triply is a hassle-free & effective tour solution for travelers. It's an all-inclusive booking and planning website that helps people make their dream trips easier.</p>
-            <div style="display:flex;gap:48px">
-              <div>
-                <div style="color:#333;font-weight:700">Pages in Projects</div>
-                <div style="font-size:20px;margin-top:6px">40+</div>
-              </div>
-              <div>
-                <div style="color:#333;font-weight:700">Retention Growth</div>
-                <div style="font-size:20px;margin-top:6px">36%</div>
-              </div>
-            </div>
-            <div class="meta">
-              <div class="avatar">S</div>
-              <div>
-                <div style="font-weight:700">Shubho Al-Farqque</div>
-                <div style="font-size:13px;color:rgba(0,0,0,0.6)">Triply CEO</div>
-              </div>
-            </div>
-          </div>
-          <div class="right">
-            <div class="mock">Tablet mock / image</div>
-          </div>
-        </article>
-      </section>
+      <div class="start-badge">Start</div>
 
-      <!-- SECTION 2 -->
-      <section class="section">
-        <article class="card" data-index="2">
-          <div class="left">
-            <div class="kicker">Restaurant</div>
-            <h2>Transform Your Dining</h2>
-            <p class="lead">At Plate, we bring you a handpicked selection of premium restaurants and a delightful ordering flow to increase conversion and retention.</p>
-            <div class="meta">
-              <div class="avatar">M</div>
-              <div><div style="font-weight:700">Maya</div><div style="font-size:13px;color:rgba(0,0,0,0.6)">Founder</div></div>
+      <!-- MANUAL CONNECTOR IMAGES (one image file used multiple times).
+         Replace 'line.png' with your dashed-line PNG (same folder or change path). -->
+      <img id="conn-start" class="connector" src="line.png" alt="" aria-hidden="true">
+      <img id="conn-1-2" class="connector" src="line.png" alt="" aria-hidden="true">
+      <img id="conn-2-3" class="connector" src="line.png" alt="" aria-hidden="true">
+      <img id="conn-3-4" class="connector" src="line.png" alt="" aria-hidden="true">
+      <img id="conn-4-5" class="connector" src="line.png" alt="" aria-hidden="true">
+      <img id="conn-7-6" class="connector" src="line.png" alt="" aria-hidden="true">
+      <img id="conn-6-5" class="connector" src="line.png" alt="" aria-hidden="true">
+
+      <!-- GRID with 7 items in DOM order (1..7). On desktop, CSS grid re-positions items 5..7
+         so bottom row shows 7,6,5 under columns 2..4 (i.e., reversed). -->
+      <div class="process-grid" id="processGrid">
+        <div class="hex item-1" tabindex="0">
+          <div class="hex-inner">
+            <div class="step-number">01</div>
+            <div class="icon"><i class="bi bi-journal-plus"></i></div>
+            <div class="title">REQUIREMENT<br>GATHERING</div>
+          </div>
+          <div class="overlay">
+            <div class="desc">
+              <h5>Requirement</h5>
+              <p>Collect requirements &amp; success metrics.</p>
             </div>
           </div>
-          <div class="right">
-            <div class="mock">Phone mock / image</div>
-          </div>
-        </article>
-      </section>
+        </div>
 
-      <!-- SECTION 3 -->
-      <section class="section">
-        <article class="card" data-index="3">
-          <div class="left">
-            <div class="kicker">SaaS</div>
-            <h2>Reducing Carbon Footprints</h2>
-            <p class="lead">Smart SaaS product for enterprise energy monitoring — dashboards, alerts and easy integrations to reduce operational emissions.</p>
-            <div class="meta">
-              <div class="avatar">R</div>
-              <div><div style="font-weight:700">Rafi</div><div style="font-size:13px;color:rgba(0,0,0,0.6)">Product Lead</div></div>
+        <div class="hex item-2" tabindex="0">
+          <div class="hex-inner">
+            <div class="step-number">02</div>
+            <div class="icon"><i class="bi bi-lightbulb"></i></div>
+            <div class="title">BRAINSTORM<br>DESIGN IDEAS</div>
+          </div>
+          <div class="overlay">
+            <div class="desc">
+              <h5>Brainstorm</h5>
+              <p>Idea generation & concepts.</p>
             </div>
           </div>
-          <div class="right">
-            <div class="mock">Desktop mock / image</div>
-          </div>
-        </article>
-      </section>
+        </div>
 
-      <!-- SECTION 4 -->
-      <section class="section">
-        <article class="card" data-index="4">
-          <div class="left">
-            <div class="kicker">Healthcare</div>
-            <h2>Revolutionize Fitness Goals</h2>
-            <p class="lead">Fitmate transforms fitness with flexible gym access, personalized schedules, and AI-driven insights to help users get results faster.</p>
-            <div class="meta">
-              <div class="avatar">A</div>
-              <div><div style="font-weight:700">Asha</div><div style="font-size:13px;color:rgba(0,0,0,0.6)">CEO</div></div>
+        <div class="hex item-3" tabindex="0">
+          <div class="hex-inner">
+            <div class="step-number">03</div>
+            <div class="icon"><i class="bi bi-person-lines-fill"></i></div>
+            <div class="title">CONTENT<br>CREATION</div>
+          </div>
+          <div class="overlay">
+            <div class="desc">
+              <h5>Content</h5>
+              <p>Create copy & visuals.</p>
             </div>
           </div>
-          <div class="right">
-            <div class="mock">Phone mock / image</div>
-          </div>
-        </article>
-      </section>
+        </div>
 
-      <!-- SECTION 5 -->
-      <section class="section">
-        <article class="card" data-index="5">
-          <div class="left">
-            <div class="kicker">Vehicle</div>
-            <h2>Simplifying Vehicle Care</h2>
-            <p class="lead">A platform for vehicle maintenance with booking, reminders and repair tracking that increases retention and trust.</p>
-            <div class="meta">
-              <div class="avatar">B</div>
-              <div><div style="font-weight:700">Bipul</div><div style="font-size:13px;color:rgba(0,0,0,0.6)">Product Manager</div></div>
+        <div class="hex item-4" tabindex="0">
+          <div class="hex-inner">
+            <div class="step-number">04</div>
+            <div class="icon"><i class="bi bi-grid-3x3-gap-fill"></i></div>
+            <div class="title">HIGH FIDELITY<br>DESIGN</div>
+          </div>
+          <div class="overlay">
+            <div class="desc">
+              <h5>Hi-Fi</h5>
+              <p>Pixel-perfect UI screens.</p>
             </div>
           </div>
-          <div class="right">
-            <div class="mock">Illustration / image</div>
+        </div>
+
+        <!-- note DOM order is 5 then 6 then 7; CSS grid will place them into columns 4,3,2 respectively -->
+        <div class="hex item-5" tabindex="0">
+          <div class="hex-inner">
+            <div class="step-number">05</div>
+            <div class="icon"><i class="bi bi-code-slash"></i></div>
+            <div class="title">DEVELOPMENT<br>AND TESTING</div>
           </div>
-        </article>
-      </section>
+          <div class="overlay">
+            <div class="desc">
+              <h5>Dev & Test</h5>
+              <p>Implement & QA.</p>
+            </div>
+          </div>
+        </div>
 
-    </div>
-  </main>
+        <div class="hex item-6" tabindex="0">
+          <div class="hex-inner">
+            <div class="step-number">06</div>
+            <div class="icon"><i class="bi bi-pc-display"></i></div>
+            <div class="title">RECEIVE A<br>TEST URL</div>
+          </div>
+          <div class="overlay">
+            <div class="desc">
+              <h5>Preview</h5>
+              <p>Test URL for review.</p>
+            </div>
+          </div>
+        </div>
 
-<script>
-  // Reveal animation: when each section's top crosses the viewport we add .in to its card.
-  // We keep previous cards visible so they remain pinned and overlapped by later ones.
-  document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('.section');
+        <div class="hex item-7" tabindex="0">
+          <div class="hex-inner">
+            <div class="step-number">07</div>
+            <div class="icon"><i class="bi bi-mortarboard-fill"></i></div>
+            <div class="title">CONGRATS!<br>YOUR SITE LIVE</div>
+          </div>
+          <div class="overlay">
+            <div class="desc">
+              <h5>Live</h5>
+              <p>Site launched — congrats!</p>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.process-grid -->
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const card = entry.target.querySelector('.card');
-        if (!card) return;
-        if (entry.isIntersecting && entry.intersectionRatio > 0.15) {
-          card.classList.add('in');
-        } else {
-          // optional: remove .in when far out of view
-          // card.classList.remove('in');
-        }
+    </div><!-- /.process-wrap -->
+  </section>
+
+  <script>
+    // overlay toggle (same as previous)
+    (function () {
+      const hexes = document.querySelectorAll('.hex');
+      function closeAll(except) { hexes.forEach(h => { if (h !== except) h.classList.remove('active'); }); }
+      hexes.forEach(h => {
+        h.addEventListener('click', function (e) {
+          if (e.target.closest('a')) return;
+          const isOpen = h.classList.contains('active');
+          if (!isOpen) { closeAll(h); h.classList.add('active'); } else h.classList.remove('active');
+        });
+        h.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const open = h.classList.contains('active'); if (!open) { closeAll(h); h.classList.add('active'); } else h.classList.remove('active'); }
+          if (e.key === 'Escape') { h.classList.remove('active'); }
+        });
       });
-    }, {
-      root: null,
-      threshold: [0.02, 0.15, 0.5]
-    });
-
-    sections.forEach(sec => observer.observe(sec));
-  });
-</script>
+      document.addEventListener('click', function (e) { if (!e.target.closest('.hex')) closeAll(null); });
+    })();
+  </script>
 </body>
+
 </html>
