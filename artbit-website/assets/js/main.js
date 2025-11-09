@@ -513,3 +513,42 @@ inputs.forEach((input) => {
   input.addEventListener("focus", focusFunc);
   input.addEventListener("blur", blurFunc);
 });
+
+
+// Single Gallery Slider
+
+$(document).ready(function () {
+  const screenWidth = window.innerWidth;
+
+  // Initialize lightGallery
+  lightGallery(document.getElementById('singleGalleryCarousel'), {
+    thumbnail: true,
+    pager: true,
+    plugins: [lgThumbnail, lgZoom],
+    hash: true,
+    preload: 3,
+    selector: '.item .link',
+    speed: 500,
+    download: false,
+    getCaptionFromTitleOrAlt: true,
+  });
+
+  $('#singleGalleryCarousel').owlCarousel({
+    loop: true,
+    margin: 30,
+    dots: true,
+    nav: false,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    center: true,
+    stagePadding: 100,
+    responsive: {
+      0: { items: 1, stagePadding: 50 },
+      575: { items: 2, stagePadding: 80 },
+      768: { items: 3, stagePadding: 100 },
+      992: { items: 3, stagePadding: 120 },
+      1200: { items: 4, stagePadding: 150 }
+    }
+  });
+});
