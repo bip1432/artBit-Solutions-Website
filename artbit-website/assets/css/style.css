@@ -838,6 +838,7 @@
   color: var(--header);
   overflow: hidden;
   display: -webkit-box;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
@@ -850,6 +851,7 @@
 
   overflow: hidden;
   display: -webkit-box;
+  line-clamp: 4;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }
@@ -981,9 +983,6 @@
   border-bottom-right-radius: 0;
 }
 
-.faq .accordion-body {
-  /* border: 1px solid var(--border-light); */
-}
 
 .faq .accordion-item:not(:first-of-type) {
   border-top: 1px solid var(--border-light);
@@ -2290,4 +2289,149 @@ textarea.input {
 .owl-theme .owl-dots .owl-dot.active span,
 .owl-theme .owl-dots .owl-dot:hover span {
   background: var(--primary);
+}
+
+
+
+.video_services .service_features_v1 {}
+
+.video_services .service_features_v1 .item {
+  background: rgba(253, 236, 239, 1);
+
+  padding: 50px;
+  min-height: 80dvh;
+
+  top: 0 !important;
+
+}
+
+.video_services .service_features_v1 .item.two {
+  background: rgba(234, 244, 251, 1);
+}
+
+.video_services .service_features_v1 .item.three {
+  background: rgba(232, 246, 243, 1);
+}
+
+.video_services .service_features_v1 .item.four {
+  background: rgba(247, 247, 247, 1);
+}
+
+.video_services .service_features_v1 .item.five {
+  background: rgba(255, 244, 230, 1);
+}
+
+.video_services .service_features_v1 .item.five {
+  background: rgba(255, 244, 230, 1);
+}
+
+.video_services .service_features_v1 .item.six {
+  background: rgba(232, 246, 243, 1);
+}
+
+.video_services .service_features_v1 .item .item_inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.video_services .service_features_v1 .item .left .service_title {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  padding: 15px 50px;
+  border: 1px solid var(--white);
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.video_services .service_features_v1 .item .left .service_title h4 {
+  font-size: 34px;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.video_services .service_features_v1 .item .left .service_title h4 {
+  font-size: 34px;
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+.video_services .service_features_v1 .item .left .service_title h4 span {
+  color: var(--primary);
+}
+
+.video_services .service_features_v1 .item .left .tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 15px;
+}
+
+.video_services .service_features_v1 .item .left .tags .tag {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--white);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: 6px;
+}
+
+.video_services .service_features_v1 .item .right video {
+  max-width: 100%;
+}
+
+
+
+.video_services .service_features_v1 .item.two .left,
+.video_services .service_features_v1 .item.four .left,
+.video_services .service_features_v1 .item.six .left {
+  text-align: right;
+}
+
+.video_services .service_features_v1 .item.two .left .tags,
+.video_services .service_features_v1 .item.four .left .tags,
+.video_services .service_features_v1 .item.six .left .tags {
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 991px) {
+  .video_services .service_features_v1 .item {
+    padding: 50px 20px;
+  }
+
+  .video_services .service_features_v1 .item .item_inner {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .video_services .service_features_v1 .item.two .item_inner,
+  .video_services .service_features_v1 .item.four .item_inner,
+  .video_services .service_features_v1 .item.six .item_inner {
+    flex-direction: column;
+  }
+
+  .video_services .service_features_v1 .item .left .tags,
+  .video_services .service_features_v1 .item.two .left .tags,
+  .video_services .service_features_v1 .item.four .left .tags,
+  .video_services .service_features_v1 .item.six .left .tags {
+    justify-content: center;
+  }
+
+  .video_services .service_features_v1 .item.two .left,
+  .video_services .service_features_v1 .item.four .left,
+  .video_services .service_features_v1 .item.six .left {
+    text-align: center;
+  }
 }
