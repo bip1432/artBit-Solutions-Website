@@ -2,528 +2,409 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Our Process — Manual CSS connectors</title>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pricing — Multi Tab</title>
+  <!-- Bootstrap 5 CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-
   <style>
     :root {
-      --hex-w: 220px;
-      --hex-h: 200px;
-      --accent: #0d6efd;
-      --bg: #fff;
-      --shadow: 0 6px 18px rgba(11, 28, 60, .06);
-      --anim: 300ms cubic-bezier(.22, .9, .36, 1);
+      --bg: #070607;
+      --card-grad: linear-gradient(135deg, #190427 0%, #2b0d3b 60%);
+      --accent: #a6ff4d;
+      /* neon green */
+      --glass: rgba(255, 255, 255, 0.03);
     }
 
     body {
-      background: linear-gradient(180deg, #fff 0%, #f7f3fb 100%);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-      color: #063b6b;
+      background: radial-gradient(ellipse at bottom right, rgba(50, 10, 80, 0.25), transparent 30%), var(--bg);
+      color: #dcdde1;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      padding: 60px 0;
     }
 
-    .our-process {
-      padding: 72px 12px;
+    .service-tabs .nav-link {
+      border-radius: 12px;
+      padding: 10px 18px;
+      color: #fff;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .process-wrap {
-      position: relative;
-      padding-bottom: 80px;
+    .service-tabs .nav-link.active {
+      background: linear-gradient(90deg, #7b3bff 0%, #8f5bff 100%);
+      color: #fff;
+      box-shadow: 0 6px 24px rgba(139, 39, 231, 0.18);
+      border-color: transparent;
     }
 
-    /* Start badge */
-    .start-badge {
-      position: absolute;
-      left: 24px;
-      top: 120px;
-      z-index: 50;
-      transform: rotate(-18deg);
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: 2px solid rgba(13, 110, 253, 0.22);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 253, 255, 0.95));
-      box-shadow: 0 8px 22px rgba(13, 110, 253, 0.04);
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 14px;
-      pointer-events: none;
+    .page-tabs .nav-link {
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin-right: 6px;
+      color: #ddd;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 0.9rem;
     }
 
-    /* GRID layout for large screens (4 top, 3 bottom reversed under columns 2..4) */
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, var(--hex-w));
-      gap: 28px 28px;
-      justify-content: center;
-      align-items: start;
-      position: relative;
-      z-index: 40;
-      /* above connectors */
-      margin-top: 8px;
+    .page-tabs .nav-link.active {
+      background: #7b3bff;
+      color: white;
+      box-shadow: 0 6px 20px rgba(123, 59, 255, 0.12);
     }
 
-    /* For smaller screens we switch to flex-wrap so items flow automatically */
-    @media (max-width: 991.98px) {
-      .process-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-    }
-
-    .hex {
-      width: var(--hex-w);
-      height: var(--hex-h);
-      -webkit-clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
-      clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
-      background: var(--bg);
-      box-shadow: var(--shadow);
+    .pricing-card {
+      background: var(--card-grad);
+      border-radius: 18px;
+      padding: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+      min-height: 480px;
       position: relative;
       overflow: hidden;
-      transition: transform var(--anim);
-      min-width: 0;
     }
 
-    .hex-inner {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 18px;
-      text-align: center;
-      pointer-events: none;
+    .pricing-card .price {
+      font-size: 42px;
+      font-weight: 700;
+      color: #fff;
     }
 
-    .step-number {
-      font-weight: 800;
-      font-size: 34px;
+    .pricing-card h5 {
       color: var(--accent);
-      border: 6px double rgba(13, 110, 253, 0.12);
+      font-weight: 700;
+      font-size: 28px;
+    }
+
+    .feature-list {
+      margin-top: 18px;
+      color: #dbe0e8;
+    }
+
+    .feature-list li {
+      margin: 10px 0;
+    }
+
+    .badge-popular {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      background: var(--accent);
+      color: #08110a;
       padding: 6px 10px;
       border-radius: 8px;
-      background: #fff;
-      transition: transform var(--anim);
-    }
-
-    .icon {
-      font-size: 34px;
-      color: var(--accent);
-      transition: transform var(--anim);
-    }
-
-    .title {
-      font-weight: 600;
-      font-size: 13px;
-      color: #063b6b;
-      transition: transform var(--anim);
-    }
-
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(13, 110, 253, 0.98), rgba(11, 92, 210, 0.98));
-      color: #fff;
-      transform: translateX(-110%);
-      transition: transform var(--anim);
-      z-index: 60;
-      display: flex;
+      font-weight: 700;
+      display: inline-flex;
+      gap: 8px;
       align-items: center;
-      justify-content: center;
-      padding: 22px;
-      text-align: left;
     }
 
-    .overlay .desc {
-      transform: translateX(-8px);
-      transition: transform var(--anim);
-      max-width: 92%;
-    }
-
-    .overlay h5 {
-      margin: 0 0 6px;
-      font-size: 16px;
-    }
-
-    .overlay p {
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.4;
-      opacity: .95;
-    }
-
-    .hex:hover,
-    .hex.active {
-      transform: translateY(-6px);
-    }
-
-    .hex:hover .step-number,
-    .hex.active .step-number {
-      transform: translateX(-28px);
-    }
-
-    .hex:hover .icon,
-    .hex.active .icon {
-      transform: translateX(-22px);
-    }
-
-    .hex:hover .title,
-    .hex.active .title {
-      transform: translateX(22px);
-    }
-
-    .hex:hover .overlay,
-    .hex.active .overlay {
-      transform: translateX(0%);
-    }
-
-    .hex:hover .overlay .desc,
-    .hex.active .overlay .desc {
-      transform: translateX(0);
-    }
-
-    /* Connector images (single line image used multiple times).
-     Each connector uses CSS variables to set position/width/rotation.
-     Edit the connector rules below to tweak. */
-    .connector {
+    .card-cta {
       position: absolute;
-      height: 16px;
-      /* match your line.png height (or scale it) */
-      z-index: 30;
-      /* behind hexes (z=40) */
-      pointer-events: none;
-      object-fit: cover;
-      transform-origin: 0 50%;
+      left: 32px;
+      right: 32px;
+      bottom: 22px;
     }
 
-    /* ---- MANUAL CONNECTOR POSITIONS ----
-     Each rule below controls a specific connector image.
-     Edit these four variables to adjust: --left, --top, --w (px), --rot (deg)
-     Example: left: 40%; top: 22%; width: 260px; transform: translate(0,-50%) rotate(12deg);
-  */
-
-    /* connector start -> 01 */
-    #conn-start {
-      left: 6%;
-      top: 28%;
-      width: 130px;
-      transform: translate(0, -50%) rotate(-20deg);
+    .btn-neon {
+      width: 100%;
+      background: linear-gradient(90deg, #8f5bff, #7b3bff);
+      color: #fff;
+      border-radius: 12px;
+      padding: 12px 18px;
+      box-shadow: 0 10px 30px rgba(123, 59, 255, 0.18);
+      border: 0;
     }
 
-    /* connectors between top items: 01->02, 02->03, 03->04 */
-    #conn-1-2 {
-      left: 18%;
-      top: 22%;
-      width: 200px;
-      transform: translate(0, -50%) rotate(4deg);
-    }
-
-    #conn-2-3 {
-      left: 34.5%;
-      top: 22%;
-      width: 200px;
-      transform: translate(0, -50%) rotate(4deg);
-    }
-
-    #conn-3-4 {
-      left: 51%;
-      top: 22%;
-      width: 200px;
-      transform: translate(0, -50%) rotate(4deg);
-    }
-
-    /* connector from top-right (04) down to bottom-right (05) */
-    #conn-4-5 {
-      left: 71%;
-      top: 32%;
-      width: 180px;
-      transform: translate(0, -50%) rotate(55deg);
-    }
-
-    /* bottom row connectors: 07->06 and 06->05 (note bottom order is reversed: 7 6 5) */
-    #conn-7-6 {
-      left: 50%;
-      top: 58%;
-      width: 190px;
-      transform: translate(0, -50%) rotate(-6deg);
-    }
-
-    #conn-6-5 {
-      left: 60%;
-      top: 58%;
-      width: 190px;
-      transform: translate(0, -50%) rotate(-6deg);
-    }
-
-    /* responsive tweaks you will almost certainly want to adjust */
-    @media (max-width: 1200px) {
-      :root {
-        --hex-w: 190px;
-        --hex-h: 170px;
-      }
-
-      /* tweak connectors */
-      #conn-1-2 {
-        left: 16%;
-        top: 20%;
-        width: 170px;
-      }
-
-      #conn-2-3 {
-        left: 34%;
-        top: 20%;
-        width: 170px;
-      }
-
-      #conn-3-4 {
-        left: 51%;
-        top: 20%;
-        width: 170px;
-      }
-
-      #conn-4-5 {
-        left: 74%;
-        top: 30%;
-        width: 150px;
-        transform: translate(0, -50%) rotate(50deg);
-      }
-
-      #conn-start {
-        left: 5.5%;
-        top: 24%;
-        width: 110px;
-        transform: translate(0, -50%) rotate(-20deg);
+    /* responsive tweaks */
+    @media (max-width:991px) {
+      .pricing-card {
+        min-height: 420px;
+        padding: 22px
       }
     }
 
-    @media (max-width: 768px) {
-      :root {
-        --hex-w: 160px;
-        --hex-h: 140px;
-      }
-
-      /* switch to flex-wrap layout — connectors hidden to avoid overlap */
-      .connector {
-        display: none;
-      }
-
-      .start-badge {
-        left: 8px;
-        top: 42px;
-        transform: rotate(-18deg) scale(.95);
-      }
-    }
-
-    /* helper: grid placement for items on large screens */
-    @media (min-width: 992px) {
-
-      /* place 1..4 in top row columns 1..4 */
-      .hex.item-1 {
-        grid-column: 1;
-        grid-row: 1;
-      }
-
-      .hex.item-2 {
-        grid-column: 2;
-        grid-row: 1;
-      }
-
-      .hex.item-3 {
-        grid-column: 3;
-        grid-row: 1;
-      }
-
-      .hex.item-4 {
-        grid-column: 4;
-        grid-row: 1;
-      }
-
-      /* bottom row: put 7,6,5 in columns 2,3,4 respectively so 4 hangs above 5 */
-      .hex.item-7 {
-        grid-column: 2;
-        grid-row: 2;
-      }
-
-      .hex.item-6 {
-        grid-column: 3;
-        grid-row: 2;
-      }
-
-      .hex.item-5 {
-        grid-column: 4;
-        grid-row: 2;
-      }
-    }
-
-    /* on small screens, just let DOM order flow (we use original order 1..7) */
-    @media (max-width: 991.98px) {
-
-      .hex.item-1,
-      .hex.item-2,
-      .hex.item-3,
-      .hex.item-4,
-      .hex.item-5,
-      .hex.item-6,
-      .hex.item-7 {
-        grid-column: auto;
-        grid-row: auto;
-      }
-    }
-
-    /* hide connectors on very small screens (optional) */
-    @media (max-width:480px) {
-      .connector {
-        display: none;
+    @media (max-width:767px) {
+      .pricing-card {
+        min-height: 420px;
+        padding: 18px
       }
     }
   </style>
 </head>
 
 <body>
-  <section class="our-process">
-    <div class="container process-wrap">
-      <h2 class="text-center mb-4" style="color:#073763; font-weight:700;">Our Process</h2>
 
-      <div class="start-badge">Start</div>
+  <div class="container">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-white">Our Pricing</h2>
+      <p class="text-muted">Choose a service category, number of pages, then pick a package</p>
+    </div>
 
-      <!-- MANUAL CONNECTOR IMAGES (one image file used multiple times).
-         Replace 'line.png' with your dashed-line PNG (same folder or change path). -->
-      <img id="conn-start" class="connector" src="line.png" alt="" aria-hidden="true">
-      <img id="conn-1-2" class="connector" src="line.png" alt="" aria-hidden="true">
-      <img id="conn-2-3" class="connector" src="line.png" alt="" aria-hidden="true">
-      <img id="conn-3-4" class="connector" src="line.png" alt="" aria-hidden="true">
-      <img id="conn-4-5" class="connector" src="line.png" alt="" aria-hidden="true">
-      <img id="conn-7-6" class="connector" src="line.png" alt="" aria-hidden="true">
-      <img id="conn-6-5" class="connector" src="line.png" alt="" aria-hidden="true">
+    <!-- Top-level service categories -->
+    <div class="service-tabs mb-4 d-flex justify-content-center">
+      <ul class="nav nav-pills" id="serviceTabs" role="tablist">
+        <li class="nav-item" role="presentation"><button class="nav-link active" id="service-website-tab"
+            data-bs-toggle="pill" data-bs-target="#service-website" type="button" role="tab">Website</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="service-graphic-tab" data-bs-toggle="pill"
+            data-bs-target="#service-graphic" type="button" role="tab">Graphic Design</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="service-video-tab" data-bs-toggle="pill"
+            data-bs-target="#service-video" type="button" role="tab">Video Editing</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="service-mobile-tab" data-bs-toggle="pill"
+            data-bs-target="#service-mobile" type="button" role="tab">Mobile App</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="service-digital-tab" data-bs-toggle="pill"
+            data-bs-target="#service-digital" type="button" role="tab">Digital Marketing</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" id="service-branding-tab"
+            data-bs-toggle="pill" data-bs-target="#service-branding" type="button" role="tab">Branding</button></li>
+      </ul>
+    </div>
 
-      <!-- GRID with 7 items in DOM order (1..7). On desktop, CSS grid re-positions items 5..7
-         so bottom row shows 7,6,5 under columns 2..4 (i.e., reversed). -->
-      <div class="process-grid" id="processGrid">
-        <div class="hex item-1" tabindex="0">
-          <div class="hex-inner">
-            <div class="step-number">01</div>
-            <div class="icon"><i class="bi bi-journal-plus"></i></div>
-            <div class="title">REQUIREMENT<br>GATHERING</div>
-          </div>
-          <div class="overlay">
-            <div class="desc">
-              <h5>Requirement</h5>
-              <p>Collect requirements &amp; success metrics.</p>
+    <div class="tab-content">
+      <!-- Repeatable service pane template -->
+      <!-- Website service -->
+      <div class="tab-pane fade show active" id="service-website" role="tabpanel">
+
+        <!-- inner page-count tabs -->
+        <div class="page-tabs mb-4 d-flex justify-content-center">
+          <ul class="nav" id="pagesWebsiteTabs" role="tablist">
+            <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="pill"
+                data-bs-target="#web-pages-1" type="button">1-10 Pages</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill"
+                data-bs-target="#web-pages-2" type="button">11-25 Pages</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill"
+                data-bs-target="#web-pages-3" type="button">26-40 Pages</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill"
+                data-bs-target="#web-pages-4" type="button">41-60 Pages</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill"
+                data-bs-target="#web-pages-5" type="button">Custom</button></li>
+          </ul>
+        </div>
+
+        <div class="tab-content">
+          <!-- 1-10 pages -->
+          <div class="tab-pane fade show active" id="web-pages-1">
+            <div class="row g-4">
+              <div class="col-lg-4">
+                <div class="pricing-card">
+                  <div class="price">$2,800</div>
+                  <div class="small text-muted">Design</div>
+                  <h5>Launch Package</h5>
+                  <hr style="opacity:.07">
+                  <ul class="feature-list list-unstyled">
+                    <li>✓ UX Research</li>
+                    <li>✓ High-Fidelity Designs</li>
+                    <li>✓ Graphic Assets</li>
+                    <li>✓ Design Style Guide</li>
+                    <li>✓ Developer Handoff</li>
+                    <li>✓ Unlimited Revisions</li>
+                  </ul>
+                  <div class="card-cta"><button class="btn btn-neon">Book a Call →</button></div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="pricing-card" style="border:2px solid rgba(138,80,255,0.35);">
+                  <div class="badge-popular">⚡ Popular</div>
+                  <div class="price">$3,500</div>
+                  <div class="small text-muted">Design + Branding</div>
+                  <h5>Growth Package</h5>
+                  <hr style="opacity:.07">
+                  <ul class="feature-list list-unstyled">
+                    <li>✓ Everything In Launch</li>
+                    <li>✓ Figma Prototype</li>
+                    <li>✓ Design Documentation</li>
+                    <li>✓ App Store/Play Store Screenshots</li>
+                    <li>✓ Post Development QA</li>
+                    <li>✓ Analytics Setup</li>
+                  </ul>
+                  <div class="card-cta"><button class="btn btn-neon">Book a Call →</button></div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="pricing-card">
+                  <div class="price">$7,800</div>
+                  <div class="small text-muted">Design + Dev + Branding</div>
+                  <h5>Signature Package</h5>
+                  <hr style="opacity:.07">
+                  <ul class="feature-list list-unstyled">
+                    <li>✓ Everything In Growth</li>
+                    <li>✓ Design Token Support</li>
+                    <li>✓ Advanced Analytics Setup</li>
+                    <li>✓ App Development</li>
+                    <li>✓ App Store Submission</li>
+                    <li>✓ Multilingual Support</li>
+                  </ul>
+                  <div class="card-cta"><button class="btn btn-neon">Book a Call →</button></div>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <!-- 11-25 pages (example different prices) -->
+          <div class="tab-pane fade" id="web-pages-2">
+            <div class="row g-4">
+              <div class="col-lg-4">
+                <div class="pricing-card">
+                  <div class="price">$3,800</div>
+                  <div class="small text-muted">Design</div>
+                  <h5>Launch Package</h5>
+                  <hr style="opacity:.07">
+                  <ul class="feature-list list-unstyled">
+                    <li>✓ More Pages</li>
+                    <li>✓ UX Research</li>
+                    <li>✓ High-Fidelity Designs</li>
+                    <li>✓ Developer Handoff</li>
+                  </ul>
+                  <div class="card-cta"><button class="btn btn-neon">Book a Call →</button></div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="pricing-card" style="border:2px solid rgba(138,80,255,0.35);">
+                  <div class="badge-popular">⚡ Popular</div>
+                  <div class="price">$5,000</div>
+                  <div class="small text-muted">Design + Branding</div>
+                  <h5>Growth Package</h5>
+                  <hr style="opacity:.07">
+                  <ul class="feature-list list-unstyled">
+                    <li>✓ Everything In Launch</li>
+                    <li>✓ Figma Prototype</li>
+                    <li>✓ Analytics Setup</li>
+                  </ul>
+                  <div class="card-cta"><button class="btn btn-neon">Book a Call →</button></div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="pricing-card">
+                  <div class="price">$10,200</div>
+                  <div class="small text-muted">Design + Dev + Branding</div>
+                  <h5>Signature Package</h5>
+                  <hr style="opacity:.07">
+                  <ul class="feature-list list-unstyled">
+                    <li>✓ Advanced Support</li>
+                    <li>✓ App Development</li>
+                    <li>✓ Multilingual Support</li>
+                  </ul>
+                  <div class="card-cta"><button class="btn btn-neon">Book a Call →</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Other page tabs can be filled similarly -->
+          <div class="tab-pane fade" id="web-pages-3">
+            <div class="p-4 text-muted">26-40 Pages packages (customize as needed)</div>
+          </div>
+          <div class="tab-pane fade" id="web-pages-4">
+            <div class="p-4 text-muted">41-60 Pages packages (customize as needed)</div>
+          </div>
+          <div class="tab-pane fade" id="web-pages-5">
+            <div class="p-4 text-muted">Custom page count — contact sales.</div>
           </div>
         </div>
 
-        <div class="hex item-2" tabindex="0">
-          <div class="hex-inner">
-            <div class="step-number">02</div>
-            <div class="icon"><i class="bi bi-lightbulb"></i></div>
-            <div class="title">BRAINSTORM<br>DESIGN IDEAS</div>
-          </div>
-          <div class="overlay">
-            <div class="desc">
-              <h5>Brainstorm</h5>
-              <p>Idea generation & concepts.</p>
+      </div>
+
+      <!-- Graphic Design service (example re-uses page tabs but with other prices) -->
+      <div class="tab-pane fade" id="service-graphic" role="tabpanel">
+        <div class="page-tabs mb-4 d-flex justify-content-center">
+          <ul class="nav" id="pagesGraphicTabs" role="tablist">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#gd-pages-1"
+                type="button">Single Assets</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#gd-pages-2"
+                type="button">Brand Kit</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#gd-pages-3"
+                type="button">Campaign</button></li>
+          </ul>
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="gd-pages-1">
+            <div class="row g-4">
+              <div class="col-lg-4">
+                <div class="pricing-card">
+                  <div class="price">$600</div>
+                  <div class="small text-muted">Logo/Graphic</div>
+                  <h5>Basic</h5>
+                  <hr style="opacity:.07">
+                  <ul class="feature-list list-unstyled">
+                    <li>✓ 2 Concepts</li>
+                    <li>✓ Source Files</li>
+                    <li>✓ 3 Revisions</li>
+                  </ul>
+                  <div class="card-cta"><button class="btn btn-neon">Book a Call →</button></div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="pricing-card" style="border:2px solid rgba(138,80,255,0.35);">
+                  <div class="badge-popular">⚡ Popular</div>
+                  <div class="price">$1,200</div>
+                  <div class="small text-muted">Logo + Brand</div>
+                  <h5>Pro</h5>
+                  <hr style="opacity:.07">
+                  <ul class="feature-list list-unstyled">
+                    <li>✓ Brand Guide</li>
+                    <li>✓ Social Kit</li>
+                    <li>✓ 6 Revisions</li>
+                  </ul>
+                  <div class="card-cta"><button class="btn btn-neon">Book a Call →</button></div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="pricing-card">
+                  <div class="price">$2,400</div>
+                  <div class="small text-muted">Full Brand</div>
+                  <h5>Agency</h5>
+                  <hr style="opacity:.07">
+                  <ul class="feature-list list-unstyled">
+                    <li>✓ Everything In Pro</li>
+                    <li>✓ Brand Assets</li>
+                    <li>✓ Guidelines</li>
+                  </ul>
+                  <div class="card-cta"><button class="btn btn-neon">Book a Call →</button></div>
+                </div>
+              </div>
+
             </div>
           </div>
+
+          <div class="tab-pane fade" id="gd-pages-2">Brand kit options...</div>
+          <div class="tab-pane fade" id="gd-pages-3">Campaign packages...</div>
         </div>
+      </div>
 
-        <div class="hex item-3" tabindex="0">
-          <div class="hex-inner">
-            <div class="step-number">03</div>
-            <div class="icon"><i class="bi bi-person-lines-fill"></i></div>
-            <div class="title">CONTENT<br>CREATION</div>
-          </div>
-          <div class="overlay">
-            <div class="desc">
-              <h5>Content</h5>
-              <p>Create copy & visuals.</p>
-            </div>
-          </div>
-        </div>
+      <!-- Video Editing service -->
+      <div class="tab-pane fade" id="service-video" role="tabpanel">
+        <div class="p-4 text-muted">Video editing packages — customize similarly.</div>
+      </div>
 
-        <div class="hex item-4" tabindex="0">
-          <div class="hex-inner">
-            <div class="step-number">04</div>
-            <div class="icon"><i class="bi bi-grid-3x3-gap-fill"></i></div>
-            <div class="title">HIGH FIDELITY<br>DESIGN</div>
-          </div>
-          <div class="overlay">
-            <div class="desc">
-              <h5>Hi-Fi</h5>
-              <p>Pixel-perfect UI screens.</p>
-            </div>
-          </div>
-        </div>
+      <!-- Mobile app service -->
+      <div class="tab-pane fade" id="service-mobile" role="tabpanel">
+        <div class="p-4 text-muted">Mobile app — re-use page-count tabs like the Website example.</div>
+      </div>
 
-        <!-- note DOM order is 5 then 6 then 7; CSS grid will place them into columns 4,3,2 respectively -->
-        <div class="hex item-5" tabindex="0">
-          <div class="hex-inner">
-            <div class="step-number">05</div>
-            <div class="icon"><i class="bi bi-code-slash"></i></div>
-            <div class="title">DEVELOPMENT<br>AND TESTING</div>
-          </div>
-          <div class="overlay">
-            <div class="desc">
-              <h5>Dev & Test</h5>
-              <p>Implement & QA.</p>
-            </div>
-          </div>
-        </div>
+      <!-- Digital marketing service -->
+      <div class="tab-pane fade" id="service-digital" role="tabpanel">
+        <div class="p-4 text-muted">Digital Marketing packages.</div>
+      </div>
 
-        <div class="hex item-6" tabindex="0">
-          <div class="hex-inner">
-            <div class="step-number">06</div>
-            <div class="icon"><i class="bi bi-pc-display"></i></div>
-            <div class="title">RECEIVE A<br>TEST URL</div>
-          </div>
-          <div class="overlay">
-            <div class="desc">
-              <h5>Preview</h5>
-              <p>Test URL for review.</p>
-            </div>
-          </div>
-        </div>
+      <!-- Branding service -->
+      <div class="tab-pane fade" id="service-branding" role="tabpanel">
+        <div class="p-4 text-muted">Branding packages.</div>
+      </div>
 
-        <div class="hex item-7" tabindex="0">
-          <div class="hex-inner">
-            <div class="step-number">07</div>
-            <div class="icon"><i class="bi bi-mortarboard-fill"></i></div>
-            <div class="title">CONGRATS!<br>YOUR SITE LIVE</div>
-          </div>
-          <div class="overlay">
-            <div class="desc">
-              <h5>Live</h5>
-              <p>Site launched — congrats!</p>
-            </div>
-          </div>
-        </div>
-      </div><!-- /.process-grid -->
+    </div>
 
-    </div><!-- /.process-wrap -->
-  </section>
+  </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // overlay toggle (same as previous)
-    (function () {
-      const hexes = document.querySelectorAll('.hex');
-      function closeAll(except) { hexes.forEach(h => { if (h !== except) h.classList.remove('active'); }); }
-      hexes.forEach(h => {
-        h.addEventListener('click', function (e) {
-          if (e.target.closest('a')) return;
-          const isOpen = h.classList.contains('active');
-          if (!isOpen) { closeAll(h); h.classList.add('active'); } else h.classList.remove('active');
-        });
-        h.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const open = h.classList.contains('active'); if (!open) { closeAll(h); h.classList.add('active'); } else h.classList.remove('active'); }
-          if (e.key === 'Escape') { h.classList.remove('active'); }
-        });
-      });
-      document.addEventListener('click', function (e) { if (!e.target.closest('.hex')) closeAll(null); });
-    })();
+    // No extra JS required for basic tab behavior — Bootstrap handles nested pills.
+    // You can add custom behavior here if you'd like to persist selections or change prices dynamically.
   </script>
 </body>
 

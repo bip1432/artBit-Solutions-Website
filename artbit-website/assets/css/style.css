@@ -1424,8 +1424,8 @@ textarea.input {
   background-image: url('../img/video-editing/video-eiditing-hero-banner.png');
 }
 
-.single_page_hero.video_eiditing {
-  background-image: url('../img/video-editing/video-eiditing-hero-banner.png');
+.single_page_hero.pricing_plans {
+  background-image: url('../img/pricing-plans/pricing-plans-hero-banner.png');
 }
 
 
@@ -1480,15 +1480,15 @@ textarea.input {
   position: absolute;
   inset: 0;
   background: linear-gradient(160.73deg, #B1E4FF 14.41%, #FFFFFF 39.97%);
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.5s ease;
   z-index: 0;
   border-radius: inherit;
 }
 
-.grid_service_card:hover::before {
+/* .grid_service_card:hover::before {
   opacity: 1;
-}
+} */
 
 .grid_service_card:hover {
   transform: translateY(-5px);
@@ -2434,4 +2434,160 @@ textarea.input {
   .video_services .service_features_v1 .item.six .left {
     text-align: center;
   }
+}
+
+
+/* Pricing Page  */
+
+.service-tabs .nav {
+  background: var(--bg-primary-light);
+  padding: 20px 30px;
+  border-radius: 10px;
+  border: 1px solid var(--primary);
+}
+
+.service-tabs .nav-pills .nav-link {
+  color: var(--primary);
+}
+
+.service-tabs .nav-pills .nav-link.active {
+  color: var(--white);
+  background-color: var(--primary);
+}
+
+.page-tabs .nav {
+  gap: 10px;
+}
+
+.page-tabs .nav .nav-link {
+  padding: 6px 10px;
+  border: 1px solid var(--tertiary);
+  border-radius: 6px;
+  color: var(--tertiary);
+}
+
+.page-tabs .nav .nav-link.active {
+  background: var(--tertiary);
+  color: var(--white);
+}
+
+.custom_pricing .requirements_card {
+  background-color: var(--bg-primary-light);
+  background-image: linear-gradient(162deg, rgba(14, 175, 255, 0.3) 8%, rgba(78, 168, 215, 0) 47%, rgba(3, 169, 255, 0) 80%, rgba(0, 162, 246, 0.4) 100%, var(--primary));
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.custom_pricing .requirements_card>h4 {
+  font-size: 42px;
+  margin-bottom: 5px;
+}
+
+.custom_pricing .requirements_card>p {
+  font-size: 16px;
+  color: var(--header);
+}
+
+.custom_pricing .requirements_card .items {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 60px;
+  position: relative;
+}
+
+.custom_pricing .requirements_card .items .left {
+  flex: 0 0 50%;
+}
+
+.custom_pricing .requirements_card .items .left li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  color: var(--secondary);
+}
+
+.custom_pricing .requirements_card .items .left li .count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--secondary);
+  color: var(--white);
+}
+
+.custom_pricing .requirements_card .items .right img {
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  width: 350px;
+  max-width: 100%;
+}
+
+.custom_pricing .feature_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.custom_pricing .feature_row .item {
+  flex: 0 0 48%;
+  background-color: var(--bg-primary-light);
+  background-image: linear-gradient(162deg, rgba(14, 175, 255, 0.3) 8%, rgba(78, 168, 215, 0) 47%, rgba(3, 169, 255, 0) 80%, rgba(0, 162, 246, 0.4) 100%, var(--primary));
+  padding: 50px 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.12);
+  height: 100%;
+  min-width: 250px;
+}
+
+.custom_pricing .feature_row .item .icon {
+  width: 60px;
+  margin-bottom: 15px;
+}
+
+.custom_pricing .feature_row .item h4 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.custom_pricing .form_card {
+  background-color: var(--bg-primary-light);
+  background-image: linear-gradient(162deg, rgba(14, 175, 255, 0.3) 8%, rgba(78, 168, 215, 0) 47%, rgba(3, 169, 255, 0) 80%, rgba(0, 162, 246, 0.4) 100%, var(--primary));
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.custom_pricing .form_card .header {
+  margin-bottom: 20px;
+}
+
+.custom_pricing .form_card .header .title {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.custom_pricing .form_card .header .desc {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.custom_pricing .form_card form .form-label {
+  margin-bottom: 5px;
+}
+
+.custom_pricing .form_card form input,
+.custom_pricing .form_card form textarea {
+  font-size: 15px;
+}
+
+
+.why_us .grid_service_card img{
+  width: 60px;
 }
