@@ -490,6 +490,21 @@ $(document).ready(function () {
       1400: { items: 3 }
     }
   });
+
+
+  // Team Testimonial
+
+  $("#teamTestimonial").owlCarousel({
+    loop: true,
+    margin: 20,
+    nav: true,
+    navText: ['<i class="fa-solid fa-arrow-left-long"></i>' , '<i class="fa-solid fa-arrow-right-long"></i>'] ,
+    autoplay: true,
+    autoplayTimeout: 4000,
+    autoplayHoverPause: true,
+    items: 1,
+
+  });
 });
 
 
@@ -551,4 +566,7 @@ $(document).ready(function () {
       1200: { items: 4, stagePadding: 150 }
     }
   });
+
+
+
 });
