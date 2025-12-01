@@ -1435,6 +1435,10 @@ textarea.input {
   background-image: url('../img/pricing-plans/pricing-plans-hero-banner.png');
 }
 
+.single_page_hero.about_us {
+  background-image: url('../img/about-us/about-us-hero-banner.png');
+}
+
 
 
 /* .single_page_hero.graphic_design {
@@ -2858,7 +2862,7 @@ textarea.input {
   color: var(--font);
 }
 
- .team_testimonial_box .owl-carousel .owl-nav {
+.team_testimonial_box .owl-carousel .owl-nav {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -2883,7 +2887,7 @@ textarea.input {
 }
 
 .team_testimonial_box .owl-carousel .owl-nav button.owl-next:hover,
-.team_testimonial_box .owl-carousel .owl-nav button.owl-prev:hover{
+.team_testimonial_box .owl-carousel .owl-nav button.owl-prev:hover {
   background: var(--primary);
   color: var(--white);
 }
@@ -2895,8 +2899,274 @@ textarea.input {
 }
 
 @media screen and (max-width: 767px) {
-  .team_testimonial_box .item{
+  .team_testimonial_box .item {
     flex-direction: column;
     align-items: center;
+  }
+}
+
+
+/* About Page  */
+
+.about-image-block .image-box {
+  position: relative;
+  display: block;
+  padding-right: 35px;
+  margin-right: 20px;
+  padding-bottom: 130px;
+}
+
+.about-image-block .image-box .pattern-layer {
+  background-image: url('../img/shape-1.png');
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 35px;
+  height: 100%;
+  background-repeat: repeat-y;
+  animation: slide 60s linear infinite;
+  -webkit-animation: slide 60s linear infinite;
+}
+
+.about-image-block .image-box .image-1 {
+  position: relative;
+  display: block;
+}
+
+.about-image-block .image-box .image-1 img{
+  height: 500px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-image-block .image-box .image img {
+  width: 100%;
+}
+
+.about-image-block .image-box .image .archie {
+  width: 70px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 70px;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-image-block .image-box .image-2 {
+  position: absolute;
+  right: 35px;
+  bottom: 0px;
+}
+
+.about-image-block .image-box .image-2 img {
+  width: 380px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-image-block .image-box .image-2:before {
+  background: var(--primary);
+  position: absolute;
+  content: '';
+  left: 0px;
+  top: -20px;
+  width: calc(100% - 20px);
+  height: 20px;
+}
+
+.about-image-block .image-box .image-3 {
+  position: absolute;
+  left: 50px;
+  bottom: 50px;
+  width: 160px;
+  height: 160px;
+  line-height: 160px;
+  text-align: center;
+  transition: all 500ms ease;
+}
+
+.about-image-block .image-box .image .logo {
+  position: absolute;
+  left: 48px;
+  bottom: 44px;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  transition: all 500ms ease;
+}
+
+.about-image-block .image-box .image-3 i {
+  background: -webkit-linear-gradient(-45deg, var(--grad-dark), var(--grad-light) 100%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 70px;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes slide {
+  from {
+    background-position: 0 1920px;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+@-webkit-keyframes slide {
+  from {
+    background-position: 0 1920px;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes rotateme {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes rotateme {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes rotateme {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes rotateme {
+  from {
+    -o-transform: rotate(0deg);
+  }
+
+  to {
+    -o-transform: rotate(360deg);
+  }
+}
+
+.rotate-me {
+  animation-name: rotateme;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  -webkit-animation-name: rotateme;
+  -webkit-animation-duration: 30s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: rotateme;
+  -moz-animation-duration: 30s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -ms-animation-name: rotateme;
+  -ms-animation-duration: 30s;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-timing-function: linear;
+  -o-animation-name: rotateme;
+  -o-animation-duration: 30s;
+  -o-animation-iteration-count: infinite;
+  -o-animation-timing-function: linear;
+}
+
+
+
+ a.video-btn {
+  position: relative;
+  display: inline-block;
+  padding: 0px 0px 0px 78px;
+  font-size: 18px;
+  line-height: 28px;
+  color: #1e1e2a;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+}
+
+
+a.video-btn i {
+  position: absolute;
+  left: 0px;
+  top: 2px;
+  width: 54px;
+  height: 54px;
+  line-height: 54px;
+  font-size: 20px;
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 0 5px rgb(11, 91, 201, .2);
+}
+
+ a.video-btn i:after {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-animation-delay: .9s;
+  animation-delay: .9s;
+  content: "";
+  position: absolute;
+  -webkit-animation: ripple 3s infinite;
+  animation: ripple 3s infinite;
+  -webkit-transition: all .4s ease;
+  transition: all .4s ease;
+}
+
+ .btn-box a {
+  float: left;
+}
+
+@-webkit-keyframes ripple {
+  70% {
+    -webkit-box-shadow: 0 0 0 10px rgb(11, 91, 201, .1);
+    box-shadow: 0 0 0 10px rgb(11, 91, 201, .1);
+  }
+
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgb(11, 91, 201, .1);
+    box-shadow: 0 0 0 0 rgb(11, 91, 201, .1);
+  }
+}
+
+@keyframes ripple {
+  70% {
+    -webkit-box-shadow: 0 0 0 10px rgb(11, 91, 201, .1);
+    box-shadow: 0 0 0 10px rgb(11, 91, 201, .1);
+  }
+
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgb(11, 91, 201, .1);
+    box-shadow: 0 0 0 0 rgb(11, 91, 201, .1);
   }
 }
